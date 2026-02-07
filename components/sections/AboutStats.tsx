@@ -1,6 +1,6 @@
 const AboutStats = () => {
     const stats = [
-        { label: "Deployed Architectures", value: "24+" },
+        { label: "Deployed Architectures", value: "5+" },
         { label: "Technical Tenure", value: "5 Yrs" },
         { label: "Strategic Alignment", value: "100%" },
     ];

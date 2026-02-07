@@ -14,7 +14,7 @@ const Header = () => {
         { name: "Who We Help", href: "/#who-we-help" },
         { name: "Testimonials", href: "/#testimonials" },
         { name: "About", href: "/about" },
-        { name: "Contact", href: "/get-started" },
+        { name: "Contact", href: "/contact" },
     ];
 
     const closeMenu = () => setIsOpen(false);

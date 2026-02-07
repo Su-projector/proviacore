@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: ['/admin', '/api', '/internal', '/drafts'],
         },
-        sitemap: 'https://proviacore.com/sitemap.xml',
+        sitemap: 'https://proviacore.vercel.app/sitemap.xml',
     }
 }

@@ -27,7 +27,7 @@ const BookACall = () => {
                         </Link>
 
                         <p className="text-xs text-center text-zinc-400">
-                            Prefer email? Reach out at <a href="mailto:contact@proviacore.com" className="text-brand-blue hover:text-brand-blue-light font-bold transition-colors">contact@proviacore.com</a> with your availability.
+                            Prefer email? Reach out at <a href="mailto:proviacore@gmail.com" className="text-brand-blue hover:text-brand-blue-light font-bold transition-colors">proviacore@gmail.com</a> with your availability.
                         </p>
                     </div>
                 </div>

@@ -3,22 +3,22 @@
 const Testimonials = () => {
     const testimonials = [
         {
-            quote: "Working with this team was a game-changer for our digital transformation. Our new website is fast, intuitive, and improved engagement by 250%.",
-            author: "Esther Nwosu",
-            role: "Product Manager, FinFlow",
-            initials: "EN",
+            quote: "Working with ProviaCore on our school's digital transformation was a remarkable experience. Their approach to UI/UX design showed a deep understanding of both functionality and human-centered design. The website they designed perfectly captured our school's identity — simple, modern, and accessible to parents and students alike. There professionalism and communication made the entire process seamless from start to finish.",
+            author: "Mr. Abayomi Kareem",
+            role: "Director, Krelis Legacy School",
+            initials: "AK",
         },
         {
-            quote: "The attention to detail and communication throughout the project were excellent. We finally have a platform that reflects our brand and supports growth.",
-            author: "Kelechi Adeyemi",
-            role: "Operations Lead, KelMarket",
-            initials: "KA",
+            quote: "Abdusobur, the founder/leader of ProviaCore, is a natural leader with an exceptional eye for design and structure. As Project Manager on the DomosX development, he balanced creativity with technical execution, ensuring our milestones were met efficiently. His ability to coordinate developers, clarify tasks, and maintain a shared vision made a major difference in our progress. He's exactly the kind of team player every startup wants on board.",
+            author: "Demi Enoch",
+            role: "Founder, DomosX / DETOVA LABS",
+            initials: "DE",
         },
         {
-            quote: "From the initial strategy sessions to launch, everything was seamless. Our learning portal is now easy to use and has helped us reach more students.",
-            author: "Tomiwa Daramola",
-            role: "Founder, LearnSmart Africa",
-            initials: "TD",
+            quote: "The GreenFingers rebranding was a turning point for our consultancy, and ProviaCore's role in that success cannot be overstated. Their enterprise design thinking and strategic input helped us redefine how we communicate our value to clients. The new brand identity led to a measurable 30% increase in engagement — but even beyond that, their commitment, clarity, and creativity made working with him truly rewarding.",
+            author: "Mr. Sulaimon S. Aribito",
+            role: "Founder/CEO, GreenFingers Edu-Connect",
+            initials: "SA",
         },
     ];
 
