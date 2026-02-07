@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #111827;
+
+  /* Locked ProviaCore Palette */
+  --brand-blue: #1A66B2;
+  --brand-blue-light: #3A85D1;
+  --brand-coral: #FF6F61;
+
+  /* Spacing & Rhythm */
+  --section-padding-y: 5rem;
+  /* 80px */
+  --container-padding-x: 1.25rem;
+  /* 20px */
+}
+
+@theme inline {
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-light: var(--brand-blue-light);
+  --color-brand-coral: var(--brand-coral);
+
+  --font-sans: var(--font-inter);
+
+  --radius-card: 1rem;
+  /* 16px - matches 2xl rounded */
+}
+
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-7xl mx-auto px-5 py-20 md:py-32;
+  }
+
+  .card-base {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-sm transition-all duration-300;
+  }
+
+  .gradient-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-brand-blue-light to-brand-coral;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 rounded-full bg-brand-blue text-white font-semibold hover:bg-brand-blue-light transition-colors flex items-center justify-center;
+  }
+
+  .btn-gradient {
+    @apply px-6 py-3 rounded-full bg-gradient-to-r from-brand-blue to-brand-coral text-white font-semibold hover:opacity-90 transition-opacity flex items-center justify-center;
+  }
+}
