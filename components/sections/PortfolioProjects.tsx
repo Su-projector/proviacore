@@ -18,7 +18,7 @@ const projects: Project[] = [
         image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80",
         tags: ["Next.js", "Embedded Map", "Integrated Forms"],
         ctaText: "View Website",
-        ctaHref: "https://krelislegacy.com",
+        ctaHref: "https://krelislegacy.vercel.app",
     },
     {
         title: "MyDomos",
