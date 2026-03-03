@@ -3,7 +3,7 @@
 const Testimonials = () => {
     const testimonials = [
         {
-            quote: "Working with ProviaCore on our school's digital transformation was a remarkable experience. Their approach to UI/UX design showed a deep understanding of both functionality and human-centered design. The website they designed perfectly captured our school's identity — simple, modern, and accessible to parents and students alike. There professionalism and communication made the entire process seamless from start to finish.",
+            quote: "Working with ProviaCore on our school's digital transformation was a remarkable experience. Their approach to UI/UX design showed a deep understanding of both functionality and human-centered design. The website they designed perfectly captured our school's identity — simple, modern, and accessible to parents and students alike. Their professionalism and communication made the entire process seamless from start to finish.",
             author: "Mr. Abayomi Kareem",
             role: "Director, Krelis Legacy School",
             initials: "AK",
