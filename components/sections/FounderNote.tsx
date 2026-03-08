@@ -2,8 +2,28 @@ import Image from "next/image";
 import Link from "next/link";
 
 const FounderNote = () => {
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Abdusobur Sulaimon",
+        jobTitle: "Founder & Lead Project Manager",
+        url: "https://proviacore.vercel.app/about",
+        image: "https://proviacore.vercel.app/abdusobur.png",
+        sameAs: [
+            "https://www.linkedin.com/in/abdusobur-sulaimon"
+        ],
+        worksFor: {
+            "@type": "Organization",
+            name: "ProviaCore"
+        }
+    };
+
     return (
         <section className="bg-white">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <div className="section-container">
                 <div className="card-base p-8 md:p-12 lg:p-16 bg-brand-blue/5 border-none shadow-sm relative overflow-hidden">
                     {/* Decorative element */}
@@ -15,7 +35,7 @@ const FounderNote = () => {
                             <div className="relative aspect-square w-full max-w-sm mx-auto [clip-path:polygon(50%_0%,100%_38%,82%_100%,18%_100%,0%_38%)] bg-white">
                                 <Image
                                     src="/abdusobur.png"
-                                    alt="Abdusobur Sulaimon - Founder & CEO"
+                                    alt="Abdusobur Sulaimon - Founder, CEO, and Lead Project Manager at ProviaCore"
                                     fill
                                     className="object-cover object-top"
                                     sizes="(max-width: 768px) 100vw, 33vw"
