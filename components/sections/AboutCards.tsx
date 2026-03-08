@@ -18,7 +18,7 @@ const AboutCards = () => {
     ];
 
     return (
-        <section className="bg-zinc-50/50 py-20 lg:py-32">
+        <section className="bg-zinc-50/50">
             <div className="section-container">
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                     {cards.map((card) => (

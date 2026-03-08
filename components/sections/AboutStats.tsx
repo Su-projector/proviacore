@@ -6,7 +6,7 @@ const AboutStats = () => {
     ];
 
     return (
-        <section className="bg-white py-20 lg:py-32">
+        <section className="bg-white">
             <div className="section-container">
                 <div className="card-base p-12 lg:p-20 bg-zinc-50 border-zinc-100 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue/5 rounded-full -translate-y-1/2 translate-x-1/2" />

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const AboutSubBrands = () => {
     return (
-        <section className="bg-white py-12 border-t border-zinc-100">
+        <section className="bg-white py-8">
             <div className="section-container">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6 opacity-60 hover:opacity-100 transition-opacity">
                     <p className="text-sm font-bold uppercase tracking-wider text-zinc-400">Ecosystem Partners</p>

@@ -1,5 +1,6 @@
 import AboutHero from "@/components/sections/AboutHero";
 import AboutCards from "@/components/sections/AboutCards";
+import FounderNote from "@/components/sections/FounderNote";
 import AboutStats from "@/components/sections/AboutStats";
 import AboutSubBrands from "@/components/sections/AboutSubBrands";
 
@@ -18,6 +19,7 @@ export default function AboutPage() {
         <div className="flex flex-col min-h-screen">
             <AboutHero />
             <AboutCards />
+            <FounderNote />
             <AboutStats />
             <AboutSubBrands />
         </div>
