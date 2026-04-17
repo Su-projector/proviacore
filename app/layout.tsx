@@ -4,12 +4,9 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: {
     default: "ProviaCore | High-Performance Web Development & Digital Solutions",
     template: "%s | ProviaCore",
@@ -22,10 +19,18 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "/",
+    url: "https://proviacore.com",
     title: "ProviaCore — Building Solutions That Drive Lasting Productivity",
     description: "We design and build modern digital products that help teams move faster, scale smarter, and operate with clarity.",
     siteName: "ProviaCore",
+    images: [
+      {
+        url: "https://proviacore.vercel.app/abdusobur.png",
+        width: 1200,
+        height: 630,
+        alt: "ProviaCore Logo",
+      }
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -36,7 +41,9 @@ export const metadata = {
     index: true,
     follow: true,
   },
-  metadataBase: new URL("https://proviacore.vercel.app"),
+  alternates: {
+    canonical: "https://proviacore.com",
+  },
 };
 
 export const viewport: Viewport = {
@@ -45,23 +52,16 @@ export const viewport: Viewport = {
   maximumScale: 1,
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children, }: { children: React.ReactNode; }) {
   const jsonLd = [
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "ProviaCore",
-      "url": "https://proviacore.vercel.app",
-      "logo": "https://proviacore.vercel.app/logo.png",
+      "url": "https://proviacore.com",
+      "logo": "https://proviacore.com/logo.png",
       "description": "Building solutions that drive lasting productivity",
-      "founder": {
-        "@type": "Person",
-        "name": "Abdusobur Sulaimon"
-      },
+      "founder": { "@type": "Person", "name": "Abdusobur Sulaimon" },
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "85 Aladelola, Ikosi-Ketu",
@@ -78,7 +78,7 @@ export default function RootLayout({
         "https://linkedin.com/company/proviacore",
         "https://twitter.com/proviacore",
         "https://github.com/proviacore"
-      ]
+      ],
     },
     {
       "@context": "https://schema.org",
@@ -92,14 +92,10 @@ export default function RootLayout({
       }
     }
   ];
-
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body className={`${inter.className} min-h-screen flex flex-col bg-white text-zinc-900 antialiased`}>
         <Header />
