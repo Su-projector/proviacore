@@ -11,6 +11,9 @@ export const metadata = {
         title: "Initiate Your Project — ProviaCore Execution Platform",
         description: "Explore a deliberate path to digital maturity with ProviaCore's consultative engagement model.",
     },
+    alternates: {
+        canonical: "/get-started",
+    },
 };
 
 export default function GetStartedPage() {

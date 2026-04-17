@@ -14,6 +14,9 @@ export const metadata = {
     title: "ProviaCore — Building Solutions That Drive Lasting Productivity",
     description: "We design and build modern digital products that help teams move faster, scale smarter, and operate with clarity.",
   },
+  alternates: {
+    canonical: "/",
+  },
 };
 
 

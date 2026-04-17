@@ -12,6 +12,9 @@ export const metadata = {
         title: "Initialize Your Project — ProviaCore Contact Hub",
         description: "Talk to an engineering team focused on architectural clarity, execution, and long-term resilient delivery.",
     },
+    alternates: {
+        canonical: "/contact",
+    },
 };
 
 export default function ContactPage() {

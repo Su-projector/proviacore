@@ -11,6 +11,9 @@ export const metadata = {
         title: "ProviaCore Portfolio — Crafted Digital Products",
         description: "A curated collection of web, AI, and platform projects built with modern technologies and execution discipline.",
     },
+    alternates: {
+        canonical: "/portfolio",
+    },
 };
 
 export default function PortfolioPage() {

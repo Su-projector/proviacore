@@ -22,7 +22,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://proviacore.com",
+    url: "/",
     title: "ProviaCore — Building Solutions That Drive Lasting Productivity",
     description: "We design and build modern digital products that help teams move faster, scale smarter, and operate with clarity.",
     siteName: "ProviaCore",
@@ -36,9 +36,7 @@ export const metadata = {
     index: true,
     follow: true,
   },
-  alternates: {
-    canonical: "https://proviacore.com",
-  },
+  metadataBase: new URL("https://proviacore.vercel.app"),
 };
 
 export const viewport: Viewport = {
@@ -57,8 +55,8 @@ export default function RootLayout({
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "ProviaCore",
-      "url": "https://proviacore.com",
-      "logo": "https://proviacore.com/logo.png",
+      "url": "https://proviacore.vercel.app",
+      "logo": "https://proviacore.vercel.app/logo.png",
       "description": "Building solutions that drive lasting productivity",
       "founder": {
         "@type": "Person",
@@ -86,10 +84,10 @@ export default function RootLayout({
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "ProviaCore",
-      "url": "https://proviacore.com",
+      "url": "https://proviacore.vercel.app",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://proviacore.com/search?q={search_term_string}",
+        "target": "https://proviacore.vercel.app/search?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     }

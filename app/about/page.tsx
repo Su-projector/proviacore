@@ -12,6 +12,9 @@ export const metadata = {
         title: "About ProviaCore — Design-First. Performance-Minded.",
         description: "A systems-driven team building scalable, well-crafted digital products for modern businesses.",
     },
+    alternates: {
+        canonical: "/about",
+    },
 };
 
 export default function AboutPage() {
