@@ -19,18 +19,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://proviacore.com",
+    url: "/",
     title: "ProviaCore — Building Solutions That Drive Lasting Productivity",
     description: "We design and build modern digital products that help teams move faster, scale smarter, and operate with clarity.",
     siteName: "ProviaCore",
-    images: [
-      {
-        url: "https://proviacore.vercel.app/abdusobur.png",
-        width: 1200,
-        height: 630,
-        alt: "ProviaCore Logo",
-      }
-    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -41,9 +33,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  alternates: {
-    canonical: "https://proviacore.com",
-  },
+  metadataBase: new URL("https://proviacore.vercel.app"),
 };
 
 export const viewport: Viewport = {

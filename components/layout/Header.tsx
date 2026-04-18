@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -23,8 +24,11 @@ const Header = () => {
         <header className="sticky top-0 z-50 w-full border-b border-zinc-200 bg-white">
             <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center">
-                    <Link href="/" className="text-xl font-bold tracking-tight text-zinc-900" onClick={closeMenu}>
-                        ProviaCore
+                    <Link href="/" className="flex items-center gap-2.5 group" onClick={closeMenu}>
+                        <div className="relative w-8 h-8 transition-transform duration-300 ease-out group-hover:scale-110 flex items-center justify-center">
+                            <Image src="/logo.png" alt="ProviaCore Icon" fill className="object-contain" />
+                        </div>
+                        <span className="text-xl font-bold tracking-tight text-zinc-900 transition-colors duration-300 group-hover:text-brand-blue">ProviaCore</span>
                     </Link>
                 </div>
 
@@ -88,8 +92,11 @@ const Header = () => {
                     }`}
             >
                 <div className="flex h-16 items-center justify-between px-4 sm:px-6">
-                    <Link href="/" className="text-xl font-bold tracking-tight text-zinc-900" onClick={closeMenu}>
-                        ProviaCore
+                    <Link href="/" className="flex items-center gap-2.5 group" onClick={closeMenu}>
+                        <div className="relative w-7 h-7 transition-transform duration-300 ease-out group-hover:scale-110 flex items-center justify-center">
+                            <Image src="/logo.png" alt="ProviaCore Icon" fill className="object-contain" />
+                        </div>
+                        <span className="text-xl font-bold tracking-tight text-zinc-900 transition-colors duration-300 group-hover:text-brand-blue">ProviaCore</span>
                     </Link>
                     <button
                         className="p-2 text-zinc-600"

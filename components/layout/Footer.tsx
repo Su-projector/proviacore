@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const Footer = () => {
     return (
@@ -7,8 +8,11 @@ const Footer = () => {
                 <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
                     {/* Brand Column */}
                     <div className="md:col-span-12 lg:col-span-5">
-                        <Link href="/" className="text-xl font-bold text-brand-blue">
-                            ProviaCore
+                        <Link href="/" className="flex items-center gap-2.5 group w-fit">
+                            <div className="relative w-8 h-8 transition-transform duration-300 ease-out group-hover:scale-110 flex items-center justify-center">
+                                <Image src="/logo.png" alt="ProviaCore Icon" fill className="object-contain" />
+                            </div>
+                            <span className="text-xl font-bold text-brand-blue transition-colors duration-300 group-hover:text-zinc-900">ProviaCore</span>
                         </Link>
                         <p className="mt-6 text-base font-semibold text-zinc-900">
                             ProviaCore — Building Solutions That Drive Lasting Productivity
