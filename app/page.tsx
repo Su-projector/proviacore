@@ -7,6 +7,7 @@ import Pricing from "@/components/sections/Pricing";
 import WhoWeHelp from "@/components/sections/WhoWeHelp";
 import Testimonials from "@/components/sections/Testimonials";
 import TechStack from "@/components/sections/TechStack";
+import { WaveDivider, DiagonalDivider } from "@/components/ui/SectionDivider";
 
 export const metadata = {
   title: "ProviaCore | High-Performance Web Development & Digital Solutions",
@@ -64,14 +65,19 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
       <Hero />
+      <WaveDivider fill="#F8F9FB" />
       <StatsBar />
+      <DiagonalDivider from="#F8F9FB" to="#FFFFFF" />
       <Services />
       <FounderNote />
+      <DiagonalDivider from="#F8F9FB" to="#0B1120" />
       <PortfolioCTA />
+      <DiagonalDivider from="#0B1120" to="#FFFFFF" />
       <Pricing />
       <WhoWeHelp />
       <Testimonials />
       <TechStack />
+      <DiagonalDivider from="#F8F9FB" to="#0B1120" />
     </div>
   );
 }

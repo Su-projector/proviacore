@@ -140,3 +140,91 @@ html {
     display: none !important;
   }
 }
+
+@media (min-width: 1280px) {
+  .services-grid > div:nth-child(3n+2) {
+    margin-top: 2.5rem;
+  }
+}
+
+/* Testimonials Grid */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .testimonials-grid {
+    grid-template-columns: 5fr 4fr 3fr;
+    gap: 32px;
+  }
+}
+
+/* FAQ Answer Accordion Transition */
+.faq-answer {
+  overflow: hidden;
+  transition: height 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Portfolio Masonry & Filter Transitions */
+.portfolio-masonry {
+  column-count: 1;
+  column-gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .portfolio-masonry {
+    column-count: 2;
+    column-gap: 24px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .portfolio-masonry {
+    column-count: 3;
+    column-gap: 32px;
+  }
+}
+
+.portfolio-item {
+  break-inside: avoid;
+  margin-bottom: 24px;
+  transition: opacity 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@media (min-width: 1280px) {
+  .portfolio-item {
+    margin-bottom: 32px;
+  }
+}
+
+.portfolio-item.hidden-filter {
+  opacity: 0;
+  transform: scale(0.96);
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* Diagonal Divider utility */
+.diagonal-divider {
+  height: 80px;
+  background: linear-gradient(135deg, var(--divider-from) 50%, var(--divider-to) 50%);
+  width: 100%;
+  display: block;
+}

@@ -48,17 +48,11 @@ const Hero = () => {
             <div className="overflow-hidden">
               <motion.h1 
                 variants={lineVariants}
-                className="font-display font-bold text-[clamp(2rem,8vw,2.5rem)] md:text-[clamp(2rem,5vw,4rem)] lg:text-[clamp(2.5rem,6vw,7rem)] leading-[0.95] tracking-[-0.03em] text-[var(--brand-white)]"
+                className="font-display font-bold text-[clamp(2.5rem,6vw,7rem)] leading-[0.95] tracking-[-0.03em] text-[var(--brand-white)]"
               >
-                Engineered for <span className="text-[var(--brand-coral)]">Scale.</span>
-              </motion.h1>
-            </div>
-            <div className="overflow-hidden">
-              <motion.h1 
-                variants={lineVariants}
-                className="font-display font-bold text-[clamp(2rem,8vw,2.5rem)] md:text-[clamp(2rem,5vw,4rem)] lg:text-[clamp(2.5rem,6vw,7rem)] leading-[0.95] tracking-[-0.03em] text-[var(--brand-white)]"
-              >
-                Built for <span className="text-[var(--brand-coral)]">Delivery.</span>
+                Engineered for&nbsp;<span className="text-[var(--brand-coral)]">Scale.</span>
+                <br className="hidden md:inline" />
+                Built for&nbsp;<span className="text-[var(--brand-coral)]">Delivery.</span>
               </motion.h1>
             </div>
           </motion.div>
@@ -67,7 +61,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="font-body text-[1rem] md:text-[1.125rem] text-[rgba(255,255,255,0.8)] leading-[1.7] max-w-xl mb-10"
+            className="font-body text-[clamp(1rem,1.5vw,1.25rem)] text-[rgba(255,255,255,0.85)] leading-[1.7] max-w-[560px] mb-10"
           >
             ProviaCore is a systems-driven digital development platform. We bridge the gap between architectural vision and production-ready execution, delivering resilient products that drive measurable business outcomes through high-performance engineering.
           </motion.p>
@@ -79,7 +73,7 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-[16px]"
           >
             <Link href="/get-started">
-              <MagneticButton variant="primary" className="w-full sm:w-auto text-[var(--brand-blue)] bg-[var(--brand-white)] hover:bg-[var(--brand-light)]">
+              <MagneticButton variant="primary" className="w-full sm:w-auto">
                 Start a Project
               </MagneticButton>
             </Link>

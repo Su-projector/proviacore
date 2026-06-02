@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { GlassCard } from '@/components/ui/GlassCard';
 
 const Testimonials = () => {
     const testimonials = [
@@ -10,21 +11,18 @@ const Testimonials = () => {
             author: "Mr. Abayomi Kareem",
             role: "Director, Krelis Legacy School",
             initials: "AK",
-            colSpan: "lg:col-span-5",
         },
         {
             quote: "Abdusobur balanced creativity with technical execution, ensuring our milestones were met efficiently. His ability to coordinate developers, clarify tasks, and maintain a shared vision made a major difference in our progress.",
             author: "Demi Enoch",
             role: "Founder, DomosX / DETOVA LABS",
             initials: "DE",
-            colSpan: "lg:col-span-4",
         },
         {
             quote: "The rebranding was a turning point for our consultancy. Their enterprise design thinking and strategic input helped us redefine how we communicate our value.",
             author: "Mr. Sulaimon S. Aribito",
             role: "Founder/CEO, GreenFingers Edu-Connect",
             initials: "SA",
-            colSpan: "lg:col-span-3",
         },
     ];
 
@@ -40,22 +38,22 @@ const Testimonials = () => {
                     </p>
                 </ScrollReveal>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                <div className="testimonials-grid">
                     {testimonials.map((t, index) => (
-                        <ScrollReveal key={index} delay={index * 150} className={t.colSpan}>
-                            <div className="relative p-6 lg:p-0 flex flex-col justify-between h-full group hover:shadow-[var(--shadow-md)] lg:hover:shadow-none transition-shadow rounded-[var(--radius-lg)] lg:rounded-none bg-white lg:bg-transparent">
+                        <ScrollReveal key={index} delay={index * 150}>
+                            <GlassCard className="relative p-5 md:p-6 lg:p-8 rounded-[20px] flex flex-col justify-between h-full group hover:shadow-[var(--shadow-lg)] transition-all duration-300">
                                 {/* Large decorative quote */}
-                                <div className="absolute -top-6 -left-4 text-[6rem] font-display font-bold text-[var(--brand-blue)] opacity-20 leading-none pointer-events-none select-none">
+                                <div className="absolute top-2 left-2 text-[clamp(4rem,8vw,8rem)] font-display font-bold text-[var(--brand-blue)] opacity-10 leading-none pointer-events-none select-none">
                                     &ldquo;
                                 </div>
                                 
-                                <div className="relative z-10">
-                                    <blockquote className="font-display font-medium text-[1.25rem] md:text-[1.5rem] leading-[1.4] tracking-[-0.01em] text-[var(--brand-dark-text)] mb-10">
+                                <div className="relative z-10 pt-4">
+                                    <blockquote className="font-display font-medium text-[1.125rem] md:text-[1.25rem] leading-[1.4] tracking-[-0.01em] text-[var(--brand-dark-text)] mb-8">
                                         {t.quote}
                                     </blockquote>
                                 </div>
 
-                                <div className="flex items-center gap-4 mt-auto">
+                                <div className="flex items-center gap-4 mt-auto relative z-10">
                                     <div className="w-12 h-12 rounded-full bg-[rgba(0,86,210,0.1)] flex items-center justify-center font-bold text-[var(--brand-blue)] font-mono shrink-0">
                                         {t.initials}
                                     </div>
@@ -64,7 +62,7 @@ const Testimonials = () => {
                                         <p className="font-mono text-[0.75rem] text-[var(--brand-gray)] uppercase tracking-[0.05em]">{t.role}</p>
                                     </div>
                                 </div>
-                            </div>
+                            </GlassCard>
                         </ScrollReveal>
                     ))}
                 </div>

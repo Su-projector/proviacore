@@ -100,6 +100,19 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" 
+          rel="stylesheet"
+        />
+        <link 
+          rel="preload" 
+          href="https://fonts.gstatic.com/s/spacegrotesk/v16/V8mDoQDjQSkFtoBWUvdHT0DmE_WLMnE.woff2" 
+          as="font" 
+          type="font/woff2" 
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="min-h-screen flex flex-col bg-[var(--brand-white)] text-[var(--brand-dark-text)] antialiased">
         <Header />

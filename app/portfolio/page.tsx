@@ -2,6 +2,7 @@ import PortfolioHero from "@/components/sections/PortfolioHero";
 import PortfolioProjects from "@/components/sections/PortfolioProjects";
 import CustomSolution from "@/components/sections/CustomSolution";
 import PortfolioTech from "@/components/sections/PortfolioTech";
+import { WaveDivider, DiagonalDivider } from "@/components/ui/SectionDivider";
 
 export const metadata = {
     title: "Portfolio | ProviaCore Web Development Projects",
@@ -52,8 +53,11 @@ export default function PortfolioPage() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsJsonLd) }}
             />
             <PortfolioHero />
+            <WaveDivider fill="#F8F9FB" />
             <PortfolioProjects />
+            <DiagonalDivider from="#F8F9FB" to="#0056D2" />
             <CustomSolution />
+            <DiagonalDivider from="#0056D2" to="#FFFFFF" />
             <PortfolioTech />
         </div>
     );

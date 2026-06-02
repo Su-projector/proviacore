@@ -1,6 +1,43 @@
+'use client';
+
 import React from 'react';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
-import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
+import { useAnimatedCounter } from '@/hooks/useAnimatedCounter';
+
+interface StatItemProps {
+  value: number;
+  suffix: string;
+  label: string;
+  delay: number;
+}
+
+const StatItem = ({ value, suffix, label, delay }: StatItemProps) => {
+  const { value: count, isComplete, ref } = useAnimatedCounter({
+    target: value,
+    duration: 2000,
+    suffix
+  });
+
+  return (
+    <ScrollReveal 
+      delay={delay}
+      className="flex-1 flex flex-col items-center justify-center py-8 md:py-0 text-center"
+    >
+      <div 
+        ref={ref}
+        className="font-mono text-[var(--brand-dark-text)] text-[clamp(2.5rem,7vw,7rem)] leading-none font-bold flex items-baseline justify-center"
+      >
+        <span>{Math.round(count)}</span>
+        {isComplete && suffix && (
+          <span className="text-[var(--brand-coral)] font-sans font-medium text-[clamp(1.5rem,4vw,3.5rem)] ml-1">{suffix}</span>
+        )}
+      </div>
+      <span className="font-mono text-[var(--brand-gray)] text-[0.75rem] uppercase tracking-[0.12em] font-medium mt-2">
+        {label}
+      </span>
+    </ScrollReveal>
+  );
+};
 
 const StatsBar = () => {
   const stats = [
@@ -22,20 +59,13 @@ const StatsBar = () => {
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-12">
         <div className="flex flex-col md:flex-row w-full divide-y md:divide-y-0 md:divide-x divide-[rgba(0,86,210,0.1)]">
           {stats.map((stat, index) => (
-            <ScrollReveal 
-              key={index} 
+            <StatItem
+              key={index}
+              value={stat.value}
+              suffix={stat.suffix}
+              label={stat.label}
               delay={index * 100}
-              className="flex-1 flex flex-col items-center justify-center py-8 md:py-0 text-center"
-            >
-              <AnimatedCounter 
-                value={stat.value} 
-                suffix={stat.suffix} 
-                className="font-mono text-[var(--brand-dark-text)] text-[clamp(2.5rem,7vw,7rem)] leading-none font-bold"
-              />
-              <span className="font-mono text-[var(--brand-gray)] text-[0.75rem] uppercase tracking-[0.12em] font-medium mt-2">
-                {stat.label}
-              </span>
-            </ScrollReveal>
+            />
           ))}
         </div>
       </div>

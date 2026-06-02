@@ -1,4 +1,68 @@
-"use client";
+'use client';
+
+import React, { useState, useRef, useEffect } from 'react';
+import { GlassCard } from '@/components/ui/GlassCard';
+import { ScrollReveal } from '@/components/ui/ScrollReveal';
+
+interface FAQItemProps {
+    question: string;
+    answer: string;
+    index: number;
+}
+
+const FAQItem = ({ question, answer, index }: FAQItemProps) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [height, setHeight] = useState(0);
+    const contentRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (contentRef.current) {
+            setHeight(isOpen ? contentRef.current.scrollHeight : 0);
+        }
+    }, [isOpen]);
+
+    return (
+        <ScrollReveal delay={index * 100}>
+            <GlassCard 
+                className="rounded-[20px] border border-[rgba(0,86,210,0.1)] hover:border-[rgba(0,86,210,0.3)] transition-all duration-300 cursor-pointer overflow-hidden"
+                onClick={() => setIsOpen(!isOpen)}
+            >
+                <div className="p-6 md:p-8 flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                        <h3 className="font-display font-bold text-[1.125rem] text-[var(--brand-dark-text)] transition-colors duration-300">
+                            {question}
+                        </h3>
+                        
+                        <div 
+                            className="faq-answer" 
+                            style={{ 
+                                height: `${height}px`,
+                                transitionDelay: isOpen ? '0.05s' : '0s' // subtle stagger feel if opened
+                            }}
+                        >
+                            <div ref={contentRef} className="pt-4">
+                                <p className="font-body text-[0.9375rem] md:text-[1rem] text-[var(--brand-gray)] leading-[1.6]">
+                                    {answer}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="shrink-0 mt-1">
+                        <svg 
+                            className={`w-5 h-5 text-[var(--brand-blue)] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.3} d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </div>
+            </GlassCard>
+        </ScrollReveal>
+    );
+};
 
 const ContactFAQ = () => {
     const faqs = [
@@ -21,23 +85,23 @@ const ContactFAQ = () => {
     ];
 
     return (
-        <section className="bg-zinc-50 py-20 lg:py-32">
-            <div className="section-container">
-                <div className="max-w-2xl mx-auto">
-                    <h2 className="text-2xl font-extrabold tracking-tight text-zinc-900 mb-12 text-center lg:text-left">
-                        Frequently Asked <span className="text-brand-blue">Questions</span>
-                    </h2>
+        <section className="bg-[var(--brand-light)] py-[64px] md:py-[80px] lg:py-[96px]">
+            <div className="w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-12">
+                <div className="max-w-3xl mx-auto">
+                    <ScrollReveal className="text-center mb-12">
+                        <h2 className="font-display font-bold text-[clamp(2rem,5vw,3rem)] tracking-[-0.02em] text-[var(--brand-dark-text)] mb-6">
+                            Frequently Asked <span className="text-[var(--brand-coral)]">Questions</span>
+                        </h2>
+                    </ScrollReveal>
 
                     <div className="space-y-4">
-                        {faqs.map((faq) => (
-                            <div key={faq.question} className="card-base bg-white p-8 shadow-sm border-zinc-100 group hover:border-brand-blue/30 transition-colors">
-                                <h3 className="text-lg font-bold text-zinc-900 mb-4 group-hover:text-brand-blue transition-colors">
-                                    {faq.question}
-                                </h3>
-                                <p className="text-sm lg:text-base leading-relaxed text-zinc-500">
-                                    {faq.answer}
-                                </p>
-                            </div>
+                        {faqs.map((faq, index) => (
+                            <FAQItem 
+                                key={index} 
+                                question={faq.question} 
+                                answer={faq.answer} 
+                                index={index} 
+                            />
                         ))}
                     </div>
                 </div>

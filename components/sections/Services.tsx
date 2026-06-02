@@ -77,7 +77,7 @@ const Services = () => {
     ];
 
     return (
-        <section id="services" className="relative bg-[var(--brand-light)] py-[64px] md:py-[80px] lg:py-[96px] overflow-hidden">
+        <section id="services" className="relative bg-[var(--brand-white)] py-[64px] md:py-[80px] lg:py-[96px] overflow-hidden">
             {/* Noise Texture */}
             <div 
                 className="absolute inset-0 pointer-events-none z-[1] opacity-[0.03]"
@@ -96,15 +96,12 @@ const Services = () => {
                     </p>
                 </ScrollReveal>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-10 services-grid">
                     {services.map((service, index) => {
-                        // Calculate stagger based on index
-                        const isMiddleColumn = index % 3 === 1;
                         return (
                             <ScrollReveal 
                                 key={index} 
                                 delay={index * 100}
-                                className={`lg:${isMiddleColumn ? 'mt-10' : 'mt-0'}`}
                             >
                                 <GlassCard className="p-8 md:p-10 flex flex-col items-start group hover:-translate-y-2 hover:border-[rgba(0,86,210,0.3)] transition-all duration-400 h-full">
                                     <div className="w-12 h-12 rounded-[12px] bg-[rgba(0,86,210,0.05)] flex items-center justify-center mb-6 group-hover:bg-[rgba(0,86,210,0.1)] transition-colors">
