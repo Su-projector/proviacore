@@ -10,8 +10,14 @@ const Services = () => {
             title: "Custom Development",
             description: "Bespoke web solutions built around your business goals, using modern technologies to deliver reliable products.",
             icon: (
-                <svg className="w-8 h-8 text-[var(--brand-blue)] group-hover:text-[var(--brand-coral)] transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                <svg className="w-8 h-8" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M16 12L8 24L16 36" />
+                    <path d="M32 12L40 24L32 36" />
+                    <circle cx="24" cy="24" r="3" fill="#0056D2" stroke="none" />
+                    <line x1="19" y1="24" x2="16" y2="24" stroke="#0056D2" />
+                    <line x1="29" y1="24" x2="32" y2="24" stroke="#0056D2" />
+                    <circle cx="16" cy="24" r="1.5" fill="#E63946" stroke="none" />
+                    <circle cx="32" cy="24" r="1.5" fill="#E63946" stroke="none" />
                 </svg>
             ),
         },
@@ -19,8 +25,10 @@ const Services = () => {
             title: "Responsive Excellence",
             description: "Mobile-first designs that deliver consistent, intuitive experiences across all devices and screen sizes.",
             icon: (
-                <svg className="w-8 h-8 text-[var(--brand-blue)] group-hover:text-[var(--brand-coral)] transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                <svg className="w-8 h-8" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="8" y="8" width="12" height="32" rx="2" />
+                    <rect x="24" y="12" width="16" height="24" rx="2" />
+                    <rect x="44" y="16" width="4" height="16" rx="2" />
                 </svg>
             ),
         },
@@ -28,8 +36,11 @@ const Services = () => {
             title: "SEO Mastery",
             description: "Search-engine-friendly architecture baked in from the start to improve visibility and growth.",
             icon: (
-                <svg className="w-8 h-8 text-[var(--brand-blue)] group-hover:text-[var(--brand-coral)] transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <svg className="w-8 h-8" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="20" cy="20" r="8" />
+                    <line x1="26" y1="26" x2="36" y2="36" />
+                    <rect x="30" y="12" width="4" height="12" />
+                    <rect x="36" y="16" width="4" height="8" />
                 </svg>
             ),
         },
@@ -37,8 +48,10 @@ const Services = () => {
             title: "Brand Advisory",
             description: "Strategic clarity and design direction to help your brand stand out in a crowded digital landscape.",
             icon: (
-                <svg className="w-8 h-8 text-[var(--brand-blue)] group-hover:text-[var(--brand-coral)] transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                <svg className="w-8 h-8" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 8h24v24H12z" />
+                    <circle cx="24" cy="20" r="4" />
+                    <path d="M24 24v4" />
                 </svg>
             ),
         },
@@ -46,8 +59,9 @@ const Services = () => {
             title: "Enterprise Security",
             description: "Robust security practices and infrastructure designed to protect your data, users, and operations.",
             icon: (
-                <svg className="w-8 h-8 text-[var(--brand-blue)] group-hover:text-[var(--brand-coral)] transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                <svg className="w-8 h-8" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M24 4l20 8v12c0 10-6 19-20 22C10 33 4 24 4 14V6l20-2z" />
+                    <rect x="20" y="22" width="8" height="8" rx="2" />
                 </svg>
             ),
         },
@@ -55,8 +69,8 @@ const Services = () => {
             title: "Strategic Evolution",
             description: "Ongoing advisory and technical updates to keep your systems stable and evolving with your scale.",
             icon: (
-                <svg className="w-8 h-8 text-[var(--brand-blue)] group-hover:text-[var(--brand-coral)] transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                <svg className="w-8 h-8" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 24h24M24 12l12 12-12 12" />
                 </svg>
             ),
         },
