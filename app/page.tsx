@@ -1,5 +1,7 @@
 import Hero from "@/components/sections/Hero";
+import StatsBar from "@/components/sections/StatsBar";
 import Services from "@/components/sections/Services";
+import FounderNote from "@/components/sections/FounderNote";
 import PortfolioCTA from "@/components/sections/PortfolioCTA";
 import Pricing from "@/components/sections/Pricing";
 import WhoWeHelp from "@/components/sections/WhoWeHelp";
@@ -62,7 +64,9 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
       <Hero />
+      <StatsBar />
       <Services />
+      <FounderNote />
       <PortfolioCTA />
       <Pricing />
       <WhoWeHelp />

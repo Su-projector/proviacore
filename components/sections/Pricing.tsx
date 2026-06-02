@@ -1,6 +1,10 @@
-"use client";
+'use client';
 
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
+import { GlassCard } from '@/components/ui/GlassCard';
+import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { MagneticButton } from '@/components/ui/MagneticButton';
 
 const Pricing = () => {
     const tiers = [
@@ -55,58 +59,71 @@ const Pricing = () => {
     ];
 
     return (
-        <section id="pricing" className="bg-white py-20 lg:py-32">
-            <div className="section-container">
-                <div className="max-w-3xl mx-auto text-center mb-16">
-                    <h2 className="text-3xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-6">
-                        Transparent <span className="text-brand-blue">Solutions.</span>
+        <section id="pricing" className="bg-white py-[64px] md:py-[80px] lg:py-[96px]">
+            <div className="w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-12">
+                <ScrollReveal className="max-w-3xl mx-auto text-center mb-16 lg:mb-24">
+                    <h2 className="font-display font-bold text-[clamp(2rem,5vw,3rem)] tracking-[-0.02em] text-[var(--brand-dark-text)] mb-6 leading-[1.1]">
+                        Transparent <span className="text-[var(--brand-coral)]">Solutions.</span>
                     </h2>
-                    <p className="text-lg lg:text-xl text-gray-600">
+                    <p className="font-body text-[1rem] md:text-[1.125rem] text-[var(--brand-gray)] leading-[1.7]">
                         Scalable delivery models built to support your growth at every stage of the digital journey.
                     </p>
-                </div>
+                </ScrollReveal>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
                     {tiers.map((tier, index) => (
-                        <div
-                            key={index}
-                            className={`card-base flex flex-col p-8 lg:p-10 relative ${tier.featured ? "ring-2 ring-brand-blue shadow-xl scale-105 z-10" : ""
-                                }`}
-                        >
-                            {tier.featured && (
-                                <div className="absolute top-0 right-8 -translate-y-1/2 bg-gradient-to-r from-brand-blue to-brand-coral text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                                    {tier.subtitle}
-                                </div>
-                            )}
-
-                            <div className="mb-8">
-                                <h3 className="text-xl font-bold text-gray-900 mb-2">{tier.name}</h3>
-                                <p className="text-sm text-gray-500 leading-relaxed mb-6">
-                                    {tier.description}
-                                </p>
-                                <div className="text-3xl font-extrabold text-brand-blue">
-                                    {tier.price}
-                                </div>
-                            </div>
-
-                            <ul className="space-y-4 mb-10 flex-grow">
-                                {tier.features.map((feature, fIndex) => (
-                                    <li key={fIndex} className="flex items-start gap-3">
-                                        <svg className="w-5 h-5 text-brand-blue mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                                        </svg>
-                                        <span className="text-gray-600 text-sm">{feature}</span>
-                                    </li>
-                                ))}
-                            </ul>
-
-                            <Link
-                                href={tier.href}
-                                className={tier.featured ? "btn-gradient w-full" : "btn-primary bg-gray-50 text-brand-blue border border-gray-200 hover:bg-gray-100 w-full"}
+                        <ScrollReveal key={index} delay={index * 150} className={tier.featured ? "z-10" : "z-0"}>
+                            <GlassCard 
+                                elevated={tier.featured}
+                                className={`flex flex-col p-8 lg:p-10 h-full relative transition-all duration-400 border-[1px]
+                                    ${tier.featured 
+                                        ? "scale-100 md:scale-105 border-[rgba(0,86,210,0.3)] shadow-[var(--shadow-xl)] bg-[rgba(255,255,255,0.85)] backdrop-blur-[20px]" 
+                                        : "border-[rgba(0,0,0,0.05)] shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] bg-white"}
+                                    ${!tier.featured && 'hover:border-transparent group'}
+                                `}
                             >
-                                {tier.cta}
-                            </Link>
-                        </div>
+                                {/* Gradient hover border for non-featured cards */}
+                                {!tier.featured && (
+                                    <div className="absolute inset-0 rounded-[var(--radius-lg)] p-[1px] bg-gradient-to-br from-[var(--brand-blue)] to-[var(--brand-coral)] opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" style={{ WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)", WebkitMaskComposite: "xor", maskComposite: "exclude" }}></div>
+                                )}
+
+                                {tier.featured && (
+                                    <div className="absolute top-0 right-8 -translate-y-1/2 bg-[var(--brand-coral)] text-white text-[0.75rem] font-mono font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-[0_4px_14px_rgba(230,57,70,0.4)]">
+                                        {tier.subtitle}
+                                    </div>
+                                )}
+
+                                <div className="mb-8">
+                                    <h3 className="font-display font-bold text-[1.5rem] text-[var(--brand-dark-text)] mb-3">{tier.name}</h3>
+                                    <p className="font-body text-[1rem] text-[var(--brand-gray)] leading-[1.6] mb-6 min-h-[48px]">
+                                        {tier.description}
+                                    </p>
+                                    <div className="font-display font-bold text-[2.5rem] text-[var(--brand-blue)] leading-none">
+                                        {tier.price}
+                                    </div>
+                                </div>
+
+                                <ul className="space-y-4 mb-10 flex-grow">
+                                    {tier.features.map((feature, fIndex) => (
+                                        <li key={fIndex} className="flex items-start gap-3">
+                                            <svg className="w-5 h-5 text-[var(--brand-coral)] mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span className="font-body text-[0.875rem] md:text-[1rem] text-[var(--brand-gray)]">{feature}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <Link href={tier.href} className="w-full">
+                                    <MagneticButton 
+                                        variant={tier.featured ? "primary" : "secondary"} 
+                                        className="w-full"
+                                    >
+                                        {tier.cta}
+                                    </MagneticButton>
+                                </Link>
+                            </GlassCard>
+                        </ScrollReveal>
                     ))}
                 </div>
             </div>

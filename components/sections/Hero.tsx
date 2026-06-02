@@ -1,76 +1,127 @@
-"use client";
+'use client';
 
+import React from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { MagneticButton } from "@/components/ui/MagneticButton";
+import { CursorSpotlight } from "@/components/ui/CursorSpotlight";
 
 const Hero = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const lineVariants: any = {
+    hidden: { y: "100%" },
+    visible: { 
+      y: "0%", 
+      transition: { duration: 0.8, ease: "easeInOut" }
+    },
+  };
+
   return (
-    <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden py-20 px-4">
-      {/* Background with abstract imagery/overlay */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-blue/5 to-white z-10" />
-        {/* Placeholder for abstract background image - following "Images must remain images" rule */}
-        <div
-          className="w-full h-full bg-cover bg-center opacity-10"
-          style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80")' }}
-        />
-      </div>
+    <CursorSpotlight className="relative w-[100vw] left-[50%] -translate-x-[50%] bg-[var(--gradient-hero)] min-h-[100vh] flex flex-col md:flex-row items-center justify-center overflow-hidden py-[64px] md:py-[96px] lg:py-[128px]">
+      {/* Noise Texture */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-[1] opacity-[0.03]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`
+        }}
+      />
 
-      <div className="relative z-10 max-w-4xl w-full text-center mb-16">
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 mb-6 leading-tight">
-          We build solutions that drive <br />
-          <span className="gradient-text">lasting productivity.</span>
-        </h1>
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-12 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+        
+        {/* Left Column: 55% */}
+        <div className="w-full lg:w-[55%] flex flex-col justify-center pt-20 lg:pt-0">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col gap-2 mb-6"
+          >
+            <div className="overflow-hidden">
+              <motion.h1 
+                variants={lineVariants}
+                className="font-display font-bold text-[clamp(2rem,8vw,2.5rem)] md:text-[clamp(2rem,5vw,4rem)] lg:text-[clamp(2.5rem,6vw,7rem)] leading-[0.95] tracking-[-0.03em] text-[var(--brand-white)]"
+              >
+                Engineered for <span className="text-[var(--brand-coral)]">Scale.</span>
+              </motion.h1>
+            </div>
+            <div className="overflow-hidden">
+              <motion.h1 
+                variants={lineVariants}
+                className="font-display font-bold text-[clamp(2rem,8vw,2.5rem)] md:text-[clamp(2rem,5vw,4rem)] lg:text-[clamp(2.5rem,6vw,7rem)] leading-[0.95] tracking-[-0.03em] text-[var(--brand-white)]"
+              >
+                Built for <span className="text-[var(--brand-coral)]">Delivery.</span>
+              </motion.h1>
+            </div>
+          </motion.div>
 
-        <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
-          From high-performance web development to strategic brand advisory, we help teams move faster and scale smarter.
-        </p>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="font-body text-[1rem] md:text-[1.125rem] text-[rgba(255,255,255,0.8)] leading-[1.7] max-w-xl mb-10"
+          >
+            ProviaCore is a systems-driven digital development platform. We bridge the gap between architectural vision and production-ready execution, delivering resilient products that drive measurable business outcomes through high-performance engineering.
+          </motion.p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/get-started" className="btn-gradient w-full sm:w-auto min-w-[200px]">
-            Start a Project
-          </Link>
-          <Link href="/#services" className="btn-primary bg-white text-brand-blue border border-gray-200 w-full sm:w-auto min-w-[200px]">
-            View Services
-          </Link>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col sm:flex-row gap-[16px]"
+          >
+            <Link href="/get-started">
+              <MagneticButton variant="primary" className="w-full sm:w-auto text-[var(--brand-blue)] bg-[var(--brand-white)] hover:bg-[var(--brand-light)]">
+                Start a Project
+              </MagneticButton>
+            </Link>
+            <Link href="/contact">
+              <MagneticButton variant="ghost" className="w-full sm:w-auto">
+                Contact Advisory
+              </MagneticButton>
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Right Column: 45% - Animated Mesh Gradient */}
+        <div className="w-full lg:w-[45%] h-[400px] lg:h-[600px] relative flex items-center justify-center">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="relative w-full h-full max-w-[500px] max-h-[500px]"
+          >
+            <div 
+              className="absolute inset-0 rounded-full blur-[60px] opacity-70 animate-mesh-1"
+              style={{ background: 'radial-gradient(circle at 50% 50%, var(--brand-blue) 0%, transparent 60%)', willChange: 'transform' }}
+            />
+            <div 
+              className="absolute inset-0 rounded-full blur-[60px] opacity-50 animate-mesh-2"
+              style={{ background: 'radial-gradient(circle at 80% 20%, var(--brand-coral) 0%, transparent 50%)', willChange: 'transform' }}
+            />
+            <div 
+              className="absolute inset-0 rounded-full blur-[60px] opacity-60 animate-mesh-3"
+              style={{ background: 'radial-gradient(circle at 20% 80%, var(--brand-navy) 0%, transparent 60%)', willChange: 'transform' }}
+            />
+          </motion.div>
         </div>
       </div>
 
-      {/* Stacked Metrics Cards - From Screenshot */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl px-4">
-        <div className="card-base p-8 text-center flex flex-col items-center justify-center">
-          <div className="w-10 h-10 rounded-lg bg-brand-blue/5 flex items-center justify-center mb-4">
-            {/* Structural Node representing delivery/throughput */}
-            <svg className="w-6 h-6 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-          </div>
-          <span className="text-4xl font-bold text-brand-blue mb-2">5+</span>
-          <span className="text-gray-500 font-medium">Projects Delivered</span>
-        </div>
-
-        <div className="card-base p-8 text-center flex flex-col items-center justify-center">
-          <div className="w-10 h-10 rounded-lg bg-brand-blue/5 flex items-center justify-center mb-4">
-            {/* Structural Prism representing precision/success */}
-            <svg className="w-6 h-6 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4L4 8l8 4 8-4-8-4zM4 12l8 4 8-4M4 16l8 4 8-4" />
-            </svg>
-          </div>
-          <span className="text-4xl font-bold text-brand-blue mb-2">100%</span>
-          <span className="text-gray-500 font-medium">Project Success Rate</span>
-        </div>
-
-        <div className="card-base p-8 text-center flex flex-col items-center justify-center bg-gray-50/50">
-          <div className="w-10 h-10 rounded-lg bg-brand-coral/5 flex items-center justify-center mb-4">
-            {/* Structural Graph representing impact/scaling */}
-            <svg className="w-6 h-6 text-brand-coral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-            </svg>
-          </div>
-          <span className="text-4xl font-bold text-brand-coral mb-2">70%+</span>
-          <span className="text-gray-500 font-medium">Impact & Results</span>
-        </div>
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-[50%] -translate-x-[50%] opacity-50 animate-bounce text-white">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
       </div>
-    </section>
+    </CursorSpotlight>
   );
 };
 

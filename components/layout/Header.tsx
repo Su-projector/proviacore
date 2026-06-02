@@ -1,11 +1,25 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const pathname = usePathname();
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 100);
+        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        handleScroll();
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const navLinks = [
         { name: "Home", href: "/" },
@@ -20,118 +34,131 @@ const Header = () => {
 
     const closeMenu = () => setIsOpen(false);
 
+    const isDarkBackground = !scrolled && pathname === "/";
+
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-zinc-200 bg-white">
-            <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+        <header 
+            className={`fixed top-0 z-[var(--z-nav)] w-full transition-all duration-400 ease-[var(--ease-default)] ${
+                scrolled 
+                    ? "h-[64px] bg-[rgba(248,249,251,0.85)] backdrop-blur-[16px] border-b border-[rgba(0,86,210,0.1)]" 
+                    : "h-[80px] bg-transparent border-b-transparent"
+            }`}
+        >
+            <div className="max-w-[1440px] mx-auto flex h-full items-center justify-between px-5 md:px-8 lg:px-12">
                 <div className="flex items-center">
                     <Link href="/" className="flex items-center gap-2.5 group" onClick={closeMenu}>
                         <div className="relative w-8 h-8 transition-transform duration-300 ease-out group-hover:scale-110 flex items-center justify-center">
                             <Image src="/logo.png" alt="ProviaCore Icon" fill className="object-contain" />
                         </div>
-                        <span className="text-xl font-bold tracking-tight text-zinc-900 transition-colors duration-300 group-hover:text-brand-blue">ProviaCore</span>
+                        <span className={`text-xl font-bold tracking-tight transition-colors duration-300 group-hover:text-[var(--brand-blue)] ${isDarkBackground ? 'text-white' : 'text-[var(--brand-dark-text)]'}`}>
+                            ProviaCore
+                        </span>
                     </Link>
                 </div>
 
                 {/* Desktop Navigation */}
-                <nav className="hidden md:ml-6 md:flex md:space-x-8">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className="text-sm font-medium text-zinc-600 transition-colors hover:text-brand-blue"
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
+                <nav className="hidden lg:flex items-center space-x-8">
+                    {navLinks.map((link) => {
+                        const isActive = pathname === link.href || (pathname === '/' && link.href === '/') || (link.href.startsWith('/#') && false); // Basic active logic
+                        return (
+                            <div key={link.name} className="relative group flex flex-col items-center">
+                                <Link
+                                    href={link.href}
+                                    className={`text-sm font-body font-medium tracking-[0.02em] transition-colors pb-1 ${
+                                        isDarkBackground ? 'text-[rgba(255,255,255,0.8)] hover:text-white' : 'text-[var(--brand-gray)] hover:text-[var(--brand-dark-text)]'
+                                    }`}
+                                >
+                                    {link.name}
+                                </Link>
+                                {/* Underline draw on hover */}
+                                <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[var(--brand-blue)] transition-all duration-300 ease-[var(--ease-default)] group-hover:w-full" />
+                                {/* Active Dot */}
+                                {isActive && (
+                                    <div className="absolute -bottom-2 w-[4px] h-[4px] rounded-full bg-[var(--brand-coral)]" />
+                                )}
+                            </div>
+                        );
+                    })}
                 </nav>
 
                 <div className="flex items-center space-x-4">
-                    <Link
-                        href="/get-started"
-                        className="hidden sm:inline-flex h-10 items-center justify-center rounded-md bg-brand-blue px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-blue-light focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2"
-                    >
-                        Start a Project
-                    </Link>
+                    <div className="hidden sm:block">
+                        <Link href="/get-started">
+                            <MagneticButton variant={isDarkBackground ? "ghost" : "primary"}>
+                                Start a Project
+                            </MagneticButton>
+                        </Link>
+                    </div>
 
                     {/* Mobile Menu Button */}
                     <button
-                        className="flex items-center p-2 text-zinc-600 md:hidden"
+                        className={`flex flex-col justify-center items-center w-8 h-8 lg:hidden z-[70] ${isOpen || !isDarkBackground ? 'text-[var(--brand-dark-text)]' : 'text-white'}`}
                         aria-label={isOpen ? "Close menu" : "Open menu"}
                         onClick={() => setIsOpen(!isOpen)}
                     >
-                        <svg
-                            className="h-6 w-6"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            {isOpen ? (
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
-                            ) : (
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M4 6h16M4 12h16M4 18h16"
-                                />
-                            )}
-                        </svg>
+                        <span className={`bg-current block transition-all duration-300 ease-out h-[2px] w-[24px] rounded-sm ${isOpen ? 'rotate-45 translate-y-[6px]' : '-translate-y-1'}`} />
+                        <span className={`bg-current block transition-all duration-300 ease-out h-[2px] w-[24px] rounded-sm my-1 ${isOpen ? 'opacity-0' : 'opacity-100'}`} />
+                        <span className={`bg-current block transition-all duration-300 ease-out h-[2px] w-[24px] rounded-sm ${isOpen ? '-rotate-45 -translate-y-[6px]' : 'translate-y-1'}`} />
                     </button>
                 </div>
             </div>
 
             {/* Mobile Menu Drawer */}
-            <div
-                className={`fixed inset-0 z-[60] bg-white transition-transform duration-300 ease-in-out md:hidden ${isOpen ? "translate-y-0" : "translate-y-full"
-                    }`}
-            >
-                <div className="flex h-16 items-center justify-between px-4 sm:px-6">
-                    <Link href="/" className="flex items-center gap-2.5 group" onClick={closeMenu}>
-                        <div className="relative w-7 h-7 transition-transform duration-300 ease-out group-hover:scale-110 flex items-center justify-center">
-                            <Image src="/logo.png" alt="ProviaCore Icon" fill className="object-contain" />
-                        </div>
-                        <span className="text-xl font-bold tracking-tight text-zinc-900 transition-colors duration-300 group-hover:text-brand-blue">ProviaCore</span>
-                    </Link>
-                    <button
-                        className="p-2 text-zinc-600"
-                        aria-label="Close menu"
-                        onClick={closeMenu}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: "-100%" }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: "-100%" }}
+                        transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+                        className="fixed inset-0 z-[60] bg-[rgba(248,249,251,0.98)] backdrop-blur-[20px] flex flex-col lg:hidden"
                     >
-                        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
+                        <div className="flex h-[80px] items-center justify-between px-5 md:px-8">
+                            {/* Logo inside menu for overlay */}
+                            <Link href="/" className="flex items-center gap-2.5 group" onClick={closeMenu}>
+                                <div className="relative w-8 h-8 flex items-center justify-center">
+                                    <Image src="/logo.png" alt="ProviaCore Icon" fill className="object-contain" />
+                                </div>
+                                <span className="text-xl font-bold tracking-tight text-[var(--brand-dark-text)]">ProviaCore</span>
+                            </Link>
+                        </div>
 
-                <nav className="flex flex-col space-y-8 px-6 py-12">
-                    {navLinks.filter(l => l.name !== "Home").map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className="text-2xl font-semibold text-zinc-900 transition-colors hover:text-brand-blue"
-                            onClick={closeMenu}
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
+                        <div className="flex-1 overflow-y-auto px-6 py-12 flex flex-col justify-center">
+                            <nav className="flex flex-col space-y-6 text-center">
+                                {navLinks.map((link, i) => (
+                                    <motion.div
+                                        key={link.name}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.1 + (i * 0.08), duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                    >
+                                        <Link
+                                            href={link.href}
+                                            className="font-display font-medium text-[2rem] text-[var(--brand-dark-text)] hover:text-[var(--brand-blue)] transition-colors inline-block"
+                                            onClick={closeMenu}
+                                        >
+                                            {link.name}
+                                        </Link>
+                                    </motion.div>
+                                ))}
+                            </nav>
 
-                    <div className="pt-8">
-                        <Link
-                            href="/get-started"
-                            className="flex h-14 items-center justify-center rounded-xl bg-brand-blue text-lg font-bold text-white transition-colors hover:bg-brand-blue-light shadow-lg"
-                            onClick={closeMenu}
-                        >
-                            Start a Project
-                        </Link>
-                    </div>
-                </nav>
-            </div>
+                            <motion.div 
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.8, duration: 0.4 }}
+                                className="mt-12 pt-8 border-t border-[rgba(0,86,210,0.1)] px-4"
+                            >
+                                <Link href="/get-started" onClick={closeMenu}>
+                                    <button className="w-full bg-[var(--brand-blue)] text-white rounded-[var(--radius-sm)] py-4 font-body font-semibold text-lg hover:bg-[#004bb8] transition-colors">
+                                        Start a Project
+                                    </button>
+                                </Link>
+                            </motion.div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </header>
     );
 };
