@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const AboutHero = () => {
     return (
-        <section className="relative bg-zinc-900 py-24 sm:py-32 overflow-hidden">
+        <section className="relative bg-zinc-900 pt-36 pb-24 sm:pt-40 sm:pb-32 overflow-hidden">
             {/* Architectural Texture/Background */}
             <div className="absolute inset-0 z-0 opacity-20">
                 <div className="absolute inset-0 bg-[radial-gradient(#1A66B2_1px,transparent_1px)] [background-size:20px_20px]" />

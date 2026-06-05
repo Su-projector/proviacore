@@ -48,7 +48,8 @@ const Header = () => {
 
     const closeMenu = () => setIsOpen(false);
 
-    const isDarkBackground = !scrolled && pathname === "/";
+    const darkHeroPages = ["/", "/about"];
+    const isDarkBackground = !scrolled && darkHeroPages.includes(pathname);
 
     return (
         <header 

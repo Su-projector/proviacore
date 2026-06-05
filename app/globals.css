@@ -133,26 +133,28 @@ html {
 }
 
 /* Custom Utility Classes */
-@utility section-container {
-  width: 100%;
-  max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
-@media (min-width: 768px) {
+@layer utilities {
   .section-container {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    width: 100%;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
-}
 
-@media (min-width: 1024px) {
-  .section-container {
-    padding-left: 3rem;
-    padding-right: 3rem;
+  @media (min-width: 768px) {
+    .section-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-container {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
   }
 }
 
