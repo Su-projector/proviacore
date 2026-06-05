@@ -40,8 +40,6 @@ const Header = () => {
         { name: "Portfolio", href: "/portfolio" },
         { name: "Services", href: "/#services" },
         { name: "Pricing", href: "/#pricing" },
-        { name: "Who We Help", href: "/#who-we-help" },
-        { name: "Testimonials", href: "/#testimonials" },
         { name: "About", href: "/about" },
         { name: "Contact", href: "/contact" },
     ];
@@ -53,13 +51,18 @@ const Header = () => {
 
     return (
         <header 
-            className={`fixed top-0 z-(--z-nav) w-full transition-all duration-400 ease-(--ease-default) ${
-                scrolled 
-                    ? "h-[64px] bg-[rgba(248,249,251,0.85)] backdrop-blur-lg border-b border-[rgba(0,86,210,0.1)]" 
-                    : "h-[80px] bg-transparent border-b-transparent"
+            className={`fixed top-0 z-50 w-full transition-all duration-400 ease-(--ease-default) ${
+                scrolled ? "h-[64px]" : "h-[80px]"
             }`}
         >
-            <div className="max-w-[1440px] mx-auto flex h-full items-center justify-between px-5 md:px-8 lg:px-12">
+            <div 
+                className={`absolute inset-0 transition-all duration-400 ease-(--ease-default) -z-10 ${
+                    scrolled 
+                        ? "bg-[rgba(248,249,251,0.85)] backdrop-blur-lg border-b border-[rgba(0,86,210,0.1)]" 
+                        : "bg-transparent border-b border-b-transparent"
+                }`}
+            />
+            <div className="max-w-[1440px] mx-auto flex h-full items-center justify-between px-5 md:px-8 lg:px-12 relative">
                 <div className="flex items-center">
                     <Link href="/" className="flex items-center gap-2.5 group" onClick={closeMenu}>
                         <div className="relative w-8 h-8 transition-transform duration-300 ease-out group-hover:scale-110 flex items-center justify-center">
@@ -149,7 +152,7 @@ const Header = () => {
                             </Link>
                         </div>
 
-                        <div className="flex-1 overflow-y-auto px-6 py-12 flex flex-col justify-center">
+                        <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col justify-start">
                             <nav className="flex flex-col space-y-6 text-center">
                                 {navLinks.map((link, i) => {
                                     const hashIndex = link.href.indexOf('#');

@@ -26,7 +26,7 @@ const Hero = () => {
   };
 
   return (
-    <CursorSpotlight className="relative w-[100vw] left-[50%] -translate-x-[50%] bg-[image:var(--gradient-hero)] min-h-[100vh] flex flex-col md:flex-row items-center justify-center overflow-hidden py-[64px] md:py-[96px] lg:py-[128px]">
+    <CursorSpotlight className="relative w-[100vw] left-[50%] -translate-x-[50%] bg-[image:var(--gradient-hero)] min-h-fit md:min-h-[100vh] flex flex-col md:flex-row items-center justify-center overflow-hidden py-[64px] md:py-[96px] lg:py-[128px]">
       {/* Noise Texture */}
       <div 
         className="absolute inset-0 pointer-events-none z-[1] opacity-[0.03]"
@@ -81,8 +81,8 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Right Column: 45% - Animated Mesh Gradient */}
-        <div className="w-full lg:w-[45%] h-[400px] lg:h-[600px] relative flex items-center justify-center">
+        {/* Right Column: 45% - Animated Mesh Gradient (desktop only) */}
+        <div className="hidden lg:flex w-[45%] h-[600px] relative items-center justify-center">
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
