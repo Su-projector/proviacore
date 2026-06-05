@@ -52,9 +52,9 @@ const Header = () => {
 
     return (
         <header 
-            className={`fixed top-0 z-[var(--z-nav)] w-full transition-all duration-400 ease-[var(--ease-default)] ${
+            className={`fixed top-0 z-(--z-nav) w-full transition-all duration-400 ease-(--ease-default) ${
                 scrolled 
-                    ? "h-[64px] bg-[rgba(248,249,251,0.85)] backdrop-blur-[16px] border-b border-[rgba(0,86,210,0.1)]" 
+                    ? "h-[64px] bg-[rgba(248,249,251,0.85)] backdrop-blur-lg border-b border-[rgba(0,86,210,0.1)]" 
                     : "h-[80px] bg-transparent border-b-transparent"
             }`}
         >
@@ -64,7 +64,7 @@ const Header = () => {
                         <div className="relative w-8 h-8 transition-transform duration-300 ease-out group-hover:scale-110 flex items-center justify-center">
                             <Image src="/logo.png" alt="ProviaCore Icon" fill className="object-contain" />
                         </div>
-                        <span className={`text-xl font-bold tracking-tight transition-colors duration-300 group-hover:text-[var(--brand-blue)] ${isDarkBackground ? 'text-white' : 'text-[var(--brand-dark-text)]'}`}>
+                        <span className={`text-xl font-bold tracking-tight transition-colors duration-300 group-hover:text-(--brand-blue) ${isDarkBackground ? 'text-white' : 'text-(--brand-dark-text)'}`}>
                             ProviaCore
                         </span>
                     </Link>
@@ -92,16 +92,16 @@ const Header = () => {
                                         setCurrentHash(linkHash);
                                     }}
                                     className={`text-sm font-body font-medium tracking-[0.02em] transition-colors pb-1 ${
-                                        isDarkBackground ? 'text-[rgba(255,255,255,0.8)] hover:text-white' : 'text-[var(--brand-gray)] hover:text-[var(--brand-dark-text)]'
+                                        isDarkBackground ? 'text-[rgba(255,255,255,0.8)] hover:text-white' : 'text-(--brand-gray) hover:text-(--brand-dark-text)'
                                     }`}
                                 >
                                     {link.name}
                                 </Link>
                                 {/* Underline draw on hover */}
-                                <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[var(--brand-blue)] transition-all duration-300 ease-[var(--ease-default)] group-hover:w-full" />
+                                <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-(--brand-blue) transition-all duration-300 ease-(--ease-default) group-hover:w-full" />
                                 {/* Active Dot */}
                                 {isActive && (
-                                    <div className="absolute -bottom-2 w-[4px] h-[4px] rounded-full bg-[var(--brand-coral)]" />
+                                    <div className="absolute -bottom-2 w-[4px] h-[4px] rounded-full bg-(--brand-coral)" />
                                 )}
                             </div>
                         );
@@ -117,7 +117,7 @@ const Header = () => {
 
                     {/* Mobile Menu Button */}
                     <button
-                        className={`flex flex-col justify-center items-center w-8 h-8 lg:hidden z-[70] ${isOpen || !isDarkBackground ? 'text-[var(--brand-dark-text)]' : 'text-white'}`}
+                        className={`flex flex-col justify-center items-center w-8 h-8 lg:hidden z-70 ${isOpen || !isDarkBackground ? 'text-(--brand-dark-text)' : 'text-white'}`}
                         aria-label={isOpen ? "Close menu" : "Open menu"}
                         onClick={() => setIsOpen(!isOpen)}
                     >
@@ -136,7 +136,7 @@ const Header = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: "-100%" }}
                         transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                        className="fixed inset-0 z-[60] bg-[rgba(248,249,251,0.98)] backdrop-blur-[20px] flex flex-col lg:hidden"
+                        className="fixed inset-0 z-60 bg-[rgba(248,249,251,0.98)] backdrop-blur-[20px] flex flex-col lg:hidden"
                     >
                         <div className="flex h-[80px] items-center justify-between px-5 md:px-8">
                             {/* Logo inside menu for overlay */}
@@ -144,7 +144,7 @@ const Header = () => {
                                 <div className="relative w-8 h-8 flex items-center justify-center">
                                     <Image src="/logo.png" alt="ProviaCore Icon" fill className="object-contain" />
                                 </div>
-                                <span className="text-xl font-bold tracking-tight text-[var(--brand-dark-text)]">ProviaCore</span>
+                                <span className="text-xl font-bold tracking-tight text-(--brand-dark-text)">ProviaCore</span>
                             </Link>
                         </div>
 
@@ -162,7 +162,7 @@ const Header = () => {
                                         >
                                             <Link
                                                 href={link.href}
-                                                className="font-display font-medium text-[2rem] text-[var(--brand-dark-text)] hover:text-[var(--brand-blue)] transition-colors inline-block"
+                                                className="font-display font-medium text-[2rem] text-(--brand-dark-text) hover:text-(--brand-blue) transition-colors inline-block"
                                                 onClick={() => {
                                                     setCurrentHash(linkHash);
                                                     closeMenu();
@@ -184,7 +184,7 @@ const Header = () => {
                                 <Link 
                                     href="/get-started" 
                                     onClick={closeMenu}
-                                    className="w-full bg-[var(--brand-blue)] text-white rounded-[var(--radius-sm)] py-4 font-body font-semibold text-lg hover:bg-[#004bb8] transition-colors flex items-center justify-center text-center"
+                                    className="w-full bg-(--brand-blue) text-white rounded-sm py-4 font-body font-semibold text-lg hover:bg-[#004bb8] transition-colors flex items-center justify-center text-center"
                                 >
                                     Start a Project
                                 </Link>

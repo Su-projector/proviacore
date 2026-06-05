@@ -114,9 +114,9 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[var(--brand-white)] text-[var(--brand-dark-text)] antialiased">
+      <body className="min-h-screen flex flex-col bg-(--brand-white) text-(--brand-dark-text) antialiased">
         <Header />
-        <main className="flex-grow">{children}</main>
+        <main className="grow">{children}</main>
         <Footer />
       </body>
     </html>

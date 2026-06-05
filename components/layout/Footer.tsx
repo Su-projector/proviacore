@@ -4,10 +4,10 @@ import { CursorSpotlight } from "@/components/ui/CursorSpotlight";
 
 const Footer = () => {
     return (
-        <footer className="w-full bg-[var(--brand-navy)] text-[var(--brand-white)]">
+        <footer className="w-full bg-(--brand-navy) text-(--brand-white)">
             
             {/* Top Section - Full Bleed */}
-            <CursorSpotlight className="relative w-[100vw] left-[50%] -translate-x-[50%] py-[80px] md:py-[128px] overflow-hidden bg-[var(--brand-navy)]">
+            <CursorSpotlight className="relative w-screen left-[50%] -translate-x-[50%] py-[80px] md:py-[128px] overflow-hidden bg-(--brand-navy)">
                 {/* Grid Pattern Overlay */}
                 <div 
                     className="absolute inset-0 z-0 opacity-5 pointer-events-none"
@@ -28,13 +28,13 @@ const Footer = () => {
                     <div className="flex flex-col sm:flex-row gap-4">
                         <Link 
                             href="/get-started"
-                            className="bg-[var(--brand-blue)] text-white rounded-[var(--radius-sm)] px-8 py-3.5 font-body font-semibold text-[0.875rem] tracking-[0.02em] hover:bg-[#004bb8] transition-all hover:-translate-y-[2px] shadow-[var(--shadow-md)] flex items-center justify-center text-center"
+                            className="bg-(--brand-blue) text-white rounded-sm px-8 py-3.5 font-body font-semibold text-[0.875rem] tracking-[0.02em] hover:bg-[#004bb8] transition-all hover:-translate-y-[2px] shadow-(--shadow-md) flex items-center justify-center text-center"
                         >
                             Start a Project
                         </Link>
                         <Link 
                             href="/contact"
-                            className="bg-transparent text-white border-[1.5px] border-[rgba(255,255,255,0.3)] rounded-[var(--radius-sm)] px-8 py-3.5 font-body font-semibold text-[0.875rem] tracking-[0.02em] hover:bg-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.5)] transition-all flex items-center justify-center text-center"
+                            className="bg-transparent text-white border-[1.5px] border-[rgba(255,255,255,0.3)] rounded-sm px-8 py-3.5 font-body font-semibold text-[0.875rem] tracking-[0.02em] hover:bg-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.5)] transition-all flex items-center justify-center text-center"
                         >
                             Contact Advisory
                         </Link>
@@ -43,7 +43,7 @@ const Footer = () => {
             </CursorSpotlight>
 
             {/* Middle Section */}
-            <div className="bg-[var(--brand-light)] py-[64px] text-[var(--brand-dark-text)]">
+            <div className="bg-(--brand-light) py-[64px] text-(--brand-dark-text)">
                 <div className="w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-12">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
                         
@@ -53,25 +53,25 @@ const Footer = () => {
                                 <div className="relative w-8 h-8 flex items-center justify-center">
                                     <Image src="/logo.png" alt="ProviaCore Icon" fill className="object-contain" />
                                 </div>
-                                <span className="text-xl font-bold text-[var(--brand-blue)] transition-colors duration-300 group-hover:text-[var(--brand-dark-text)]">ProviaCore</span>
+                                <span className="text-xl font-bold text-(--brand-blue) transition-colors duration-300 group-hover:text-(--brand-dark-text)">ProviaCore</span>
                             </Link>
-                            <p className="font-body text-[1rem] leading-[1.7] text-[var(--brand-gray)]">
+                            <p className="font-body text-[1rem] leading-[1.7] text-(--brand-gray)">
                                 ProviaCore — Building Solutions That Drive Lasting Productivity
                             </p>
                         </div>
 
                         {/* Column 2: Quick Links */}
                         <div>
-                            <h3 className="font-mono font-medium text-[0.75rem] uppercase tracking-[0.12em] mb-6 text-[var(--brand-dark-text)]">Quick Links</h3>
+                            <h3 className="font-mono font-medium text-[0.75rem] uppercase tracking-[0.12em] mb-6 text-(--brand-dark-text)">Quick Links</h3>
                             <ul className="space-y-4">
                                 {["Services", "Pricing", "Who We Help", "Testimonials", "About", "Contact"].map((item) => {
                                     const isPage = item === "About" || item === "Contact";
                                     const href = isPage ? `/${item.toLowerCase().replace(/ /g, '-')}` : `/#${item.toLowerCase().replace(/ /g, '-')}`;
                                     return (
                                         <li key={item}>
-                                            <Link href={href} className="font-body text-[1rem] text-[var(--brand-gray)] hover:text-[var(--brand-blue)] transition-colors inline-block relative group">
+                                            <Link href={href} className="font-body text-[1rem] text-(--brand-gray) hover:text-(--brand-blue) transition-colors inline-block relative group">
                                                 {item}
-                                                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[var(--brand-blue)] transition-all duration-300 group-hover:w-full"></span>
+                                                <span className="absolute bottom-0 left-0 w-0 h-px bg-(--brand-blue) transition-all duration-300 group-hover:w-full"></span>
                                             </Link>
                                         </li>
                                     );
@@ -81,25 +81,25 @@ const Footer = () => {
 
                         {/* Column 3: Sub-Brands */}
                         <div>
-                            <h3 className="font-mono font-medium text-[0.75rem] uppercase tracking-[0.12em] mb-6 text-[var(--brand-dark-text)]">Sub-Brands</h3>
+                            <h3 className="font-mono font-medium text-[0.75rem] uppercase tracking-[0.12em] mb-6 text-(--brand-dark-text)">Sub-Brands</h3>
                             <ul className="space-y-4">
-                                <li><span className="font-body text-[1rem] text-[var(--brand-gray)]">Project Team</span></li>
-                                <li><span className="font-body text-[1rem] text-[var(--brand-gray)]">Mastery Coaching</span></li>
-                                <li><span className="font-body text-[1rem] text-[var(--brand-gray)]">Brand / Design Advisory</span></li>
+                                <li><span className="font-body text-[1rem] text-(--brand-gray)">Project Team</span></li>
+                                <li><span className="font-body text-[1rem] text-(--brand-gray)">Mastery Coaching</span></li>
+                                <li><span className="font-body text-[1rem] text-(--brand-gray)">Brand / Design Advisory</span></li>
                             </ul>
                         </div>
 
                         {/* Column 4: Newsletter */}
                         <div>
-                            <h3 className="font-mono font-medium text-[0.75rem] uppercase tracking-[0.12em] mb-6 text-[var(--brand-dark-text)]">Stay Updated</h3>
-                            <form className="flex items-end border-b border-[rgba(0,86,210,0.3)] pb-2 relative group focus-within:border-[var(--brand-blue)] transition-colors">
+                            <h3 className="font-mono font-medium text-[0.75rem] uppercase tracking-[0.12em] mb-6 text-(--brand-dark-text)">Stay Updated</h3>
+                            <form className="flex items-end border-b border-[rgba(0,86,210,0.3)] pb-2 relative group focus-within:border-(--brand-blue) transition-colors">
                                 <input 
                                     type="email" 
                                     placeholder="Enter your email" 
-                                    className="w-full bg-transparent border-none outline-none font-body text-[1rem] text-[var(--brand-dark-text)] placeholder-[var(--brand-gray)]"
+                                    className="w-full bg-transparent border-none outline-none font-body text-[1rem] text-(--brand-dark-text) placeholder-(--brand-gray)"
                                     required
                                 />
-                                <button type="submit" className="w-[32px] h-[32px] rounded-full bg-[var(--brand-coral)] flex items-center justify-center text-white hover:opacity-90 transition-opacity ml-2 shrink-0">
+                                <button type="submit" className="w-[32px] h-[32px] rounded-full bg-(--brand-coral) flex items-center justify-center text-white hover:opacity-90 transition-opacity ml-2 shrink-0">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <line x1="5" y1="12" x2="19" y2="12"></line>
                                         <polyline points="12 5 19 12 12 19"></polyline>
@@ -112,7 +112,7 @@ const Footer = () => {
             </div>
 
             {/* Bottom Bar */}
-            <div className="bg-[var(--brand-navy)] py-[24px] border-t border-[rgba(255,255,255,0.1)]">
+            <div className="bg-(--brand-navy) py-[24px] border-t border-[rgba(255,255,255,0.1)]">
                 <div className="w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="font-mono text-[0.75rem] uppercase tracking-[0.12em] text-[rgba(255,255,255,0.5)]">
                         &copy; {new Date().getFullYear()} PROVIACORE SYSTEMS. BUILT FOR RESILIENT DELIVERY.
