@@ -26,15 +26,17 @@ const Footer = () => {
                         Ready to engineer your next digital ecosystem? We are here to listen.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <Link href="/get-started">
-                            <button className="bg-[var(--brand-blue)] text-white rounded-[var(--radius-sm)] px-8 py-3.5 font-body font-semibold text-[0.875rem] tracking-[0.02em] hover:bg-[#004bb8] transition-all hover:-translate-y-[2px] shadow-[var(--shadow-md)]">
-                                Start a Project
-                            </button>
+                        <Link 
+                            href="/get-started"
+                            className="bg-[var(--brand-blue)] text-white rounded-[var(--radius-sm)] px-8 py-3.5 font-body font-semibold text-[0.875rem] tracking-[0.02em] hover:bg-[#004bb8] transition-all hover:-translate-y-[2px] shadow-[var(--shadow-md)] flex items-center justify-center text-center"
+                        >
+                            Start a Project
                         </Link>
-                        <Link href="/contact">
-                            <button className="bg-transparent text-white border-[1.5px] border-[rgba(255,255,255,0.3)] rounded-[var(--radius-sm)] px-8 py-3.5 font-body font-semibold text-[0.875rem] tracking-[0.02em] hover:bg-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.5)] transition-all">
-                                Contact Advisory
-                            </button>
+                        <Link 
+                            href="/contact"
+                            className="bg-transparent text-white border-[1.5px] border-[rgba(255,255,255,0.3)] rounded-[var(--radius-sm)] px-8 py-3.5 font-body font-semibold text-[0.875rem] tracking-[0.02em] hover:bg-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.5)] transition-all flex items-center justify-center text-center"
+                        >
+                            Contact Advisory
                         </Link>
                     </div>
                 </div>

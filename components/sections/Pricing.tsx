@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { MagneticButton } from '@/components/ui/MagneticButton';
@@ -75,6 +74,7 @@ const Pricing = () => {
                         <ScrollReveal key={index} delay={index * 150} className={tier.featured ? "z-10" : "z-0"}>
                             <GlassCard 
                                 elevated={tier.featured}
+                                overflowHidden={!tier.featured}
                                 className={`flex flex-col p-8 lg:p-10 h-full relative transition-all duration-400 border-[1px]
                                     ${tier.featured 
                                         ? "scale-100 md:scale-105 border-[rgba(0,86,210,0.3)] shadow-[var(--shadow-xl)] bg-[rgba(255,255,255,0.85)] backdrop-blur-[20px]" 
@@ -114,14 +114,13 @@ const Pricing = () => {
                                     ))}
                                 </ul>
 
-                                <Link href={tier.href} className="w-full">
-                                    <MagneticButton 
-                                        variant={tier.featured ? "primary" : "secondary"} 
-                                        className="w-full"
-                                    >
-                                        {tier.cta}
-                                    </MagneticButton>
-                                </Link>
+                                <MagneticButton 
+                                    variant={tier.featured ? "primary" : "secondary"} 
+                                    href={tier.href}
+                                    className="w-full"
+                                >
+                                    {tier.cta}
+                                </MagneticButton>
                             </GlassCard>
                         </ScrollReveal>
                     ))}

@@ -32,7 +32,9 @@ export const CursorSpotlight: React.FC<CursorSpotlightProps> = ({ className = ''
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
 
-            // Only request animation frame if we don't have one pending
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
             animationFrameId = requestAnimationFrame(() => {
                 setPosition({ x, y });
             });

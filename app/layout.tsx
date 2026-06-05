@@ -73,7 +73,7 @@ export default function RootLayout({
         "@type": "ContactPoint",
         telephone: "+234 815 176 2900",
         contactType: "customer service",
-        email: "contact@proviacore.com",
+        email: "proviacore@gmail.com",
       },
       sameAs: [
         "https://linkedin.com/company/proviacore",

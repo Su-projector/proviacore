@@ -3,15 +3,17 @@ import { cn } from '@/lib/utils';
 
 interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
   elevated?: boolean;
+  overflowHidden?: boolean;
 }
 
 export const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
-  ({ children, className, elevated = false, ...props }, ref) => {
+  ({ children, className, elevated = false, overflowHidden = true, ...props }, ref) => {
     return (
       <div
         ref={ref}
         className={cn(
-          "relative overflow-hidden",
+          "relative",
+          overflowHidden ? "overflow-hidden" : "",
           "bg-[rgba(255,255,255,0.7)] backdrop-blur-xl",
           "border border-[rgba(0,86,210,0.1)]",
           "rounded-[var(--radius-lg)]",

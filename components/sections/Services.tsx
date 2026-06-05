@@ -98,22 +98,25 @@ const Services = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-10 services-grid">
                     {services.map((service, index) => {
+                        const isMiddleColumn = index % 3 === 1;
                         return (
                             <ScrollReveal 
                                 key={index} 
                                 delay={index * 100}
                             >
-                                <GlassCard className="p-8 md:p-10 flex flex-col items-start group hover:-translate-y-2 hover:border-[rgba(0,86,210,0.3)] transition-all duration-400 h-full">
-                                    <div className="w-12 h-12 rounded-[12px] bg-[rgba(0,86,210,0.05)] flex items-center justify-center mb-6 group-hover:bg-[rgba(0,86,210,0.1)] transition-colors">
-                                        {service.icon}
-                                    </div>
-                                    <h3 className="font-display font-bold text-[1.25rem] text-[var(--brand-dark-text)] mb-3">
-                                        {service.title}
-                                    </h3>
-                                    <p className="font-body text-[1rem] text-[var(--brand-gray)] leading-[1.6]">
-                                        {service.description}
-                                    </p>
-                                </GlassCard>
+                                <div className={isMiddleColumn ? "lg:translate-y-6" : ""}>
+                                    <GlassCard className="p-8 md:p-10 flex flex-col items-start group hover:-translate-y-2 hover:border-[rgba(0,86,210,0.3)] transition-all duration-400 h-full">
+                                        <div className="w-12 h-12 rounded-[12px] bg-[rgba(0,86,210,0.05)] flex items-center justify-center mb-6 group-hover:bg-[rgba(0,86,210,0.1)] transition-colors">
+                                            {service.icon}
+                                        </div>
+                                        <h3 className="font-display font-bold text-[1.25rem] text-[var(--brand-dark-text)] mb-3">
+                                            {service.title}
+                                        </h3>
+                                        <p className="font-body text-[1rem] text-[var(--brand-gray)] leading-[1.6]">
+                                            {service.description}
+                                        </p>
+                                    </GlassCard>
+                                </div>
                             </ScrollReveal>
                         );
                     })}

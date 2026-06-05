@@ -26,7 +26,7 @@ const Hero = () => {
   };
 
   return (
-    <CursorSpotlight className="relative w-[100vw] left-[50%] -translate-x-[50%] bg-[var(--gradient-hero)] min-h-[100vh] flex flex-col md:flex-row items-center justify-center overflow-hidden py-[64px] md:py-[96px] lg:py-[128px]">
+    <CursorSpotlight className="relative w-[100vw] left-[50%] -translate-x-[50%] bg-[image:var(--gradient-hero)] min-h-[100vh] flex flex-col md:flex-row items-center justify-center overflow-hidden py-[64px] md:py-[96px] lg:py-[128px]">
       {/* Noise Texture */}
       <div 
         className="absolute inset-0 pointer-events-none z-[1] opacity-[0.03]"
@@ -72,16 +72,12 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col sm:flex-row gap-[16px]"
           >
-            <Link href="/get-started">
-              <MagneticButton variant="primary" className="w-full sm:w-auto">
-                Start a Project
-              </MagneticButton>
-            </Link>
-            <Link href="/contact">
-              <MagneticButton variant="ghost" className="w-full sm:w-auto">
-                Contact Advisory
-              </MagneticButton>
-            </Link>
+            <MagneticButton variant="primary" href="/get-started" className="w-full sm:w-auto">
+              Start a Project
+            </MagneticButton>
+            <MagneticButton variant="ghost" href="/contact" className="w-full sm:w-auto">
+              Contact Advisory
+            </MagneticButton>
           </motion.div>
         </div>
 

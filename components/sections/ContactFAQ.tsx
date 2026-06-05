@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
@@ -12,20 +13,23 @@ interface FAQItemProps {
 
 const FAQItem = ({ question, answer, index }: FAQItemProps) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [height, setHeight] = useState(0);
-    const contentRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        if (contentRef.current) {
-            setHeight(isOpen ? contentRef.current.scrollHeight : 0);
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setIsOpen(!isOpen);
         }
-    }, [isOpen]);
+    };
 
     return (
         <ScrollReveal delay={index * 100}>
             <GlassCard 
-                className="rounded-[20px] border border-[rgba(0,86,210,0.1)] hover:border-[rgba(0,86,210,0.3)] transition-all duration-300 cursor-pointer overflow-hidden"
+                className="rounded-[20px] border border-[rgba(0,86,210,0.1)] hover:border-[rgba(0,86,210,0.3)] transition-all duration-300 cursor-pointer overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--brand-blue)]"
                 onClick={() => setIsOpen(!isOpen)}
+                onKeyDown={handleKeyDown}
+                tabIndex={0}
+                role="button"
+                aria-expanded={isOpen}
             >
                 <div className="p-6 md:p-8 flex items-start justify-between gap-4">
                     <div className="flex-1">
@@ -33,19 +37,23 @@ const FAQItem = ({ question, answer, index }: FAQItemProps) => {
                             {question}
                         </h3>
                         
-                        <div 
-                            className="faq-answer" 
-                            style={{ 
-                                height: `${height}px`,
-                                transitionDelay: isOpen ? '0.05s' : '0s' // subtle stagger feel if opened
-                            }}
-                        >
-                            <div ref={contentRef} className="pt-4">
-                                <p className="font-body text-[0.9375rem] md:text-[1rem] text-[var(--brand-gray)] leading-[1.6]">
-                                    {answer}
-                                </p>
-                            </div>
-                        </div>
+                        <AnimatePresence initial={false}>
+                            {isOpen && (
+                                <motion.div 
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    className="overflow-hidden"
+                                >
+                                    <div className="pt-4">
+                                        <p className="font-body text-[0.9375rem] md:text-[1rem] text-[var(--brand-gray)] leading-[1.6]">
+                                            {answer}
+                                        </p>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
 
                     <div className="shrink-0 mt-1">

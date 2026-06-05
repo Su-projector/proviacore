@@ -240,81 +240,86 @@ const PortfolioProjects = () => {
 
                 {/* Grid Masonry container */}
                 <div className="portfolio-masonry">
-                    {projects.map((project, index) => {
-                        const isVisible = activeFilter === "All" || project.category === activeFilter;
-                        
-                        return (
-                            <div
-                                key={index}
-                                className={`portfolio-item ${isVisible ? '' : 'hidden-filter'}`}
-                            >
-                                <GlassCard className="rounded-[20px] overflow-hidden flex flex-col group hover:-translate-y-2 hover:border-[rgba(0,86,210,0.3)] transition-all duration-400 h-full border border-[rgba(0,86,210,0.08)] bg-[rgba(255,255,255,0.6)] backdrop-blur-md">
-                                    {/* Thumbnail Image Container */}
-                                    <div className="w-full aspect-[16/10] overflow-hidden relative bg-zinc-100 border-b border-[rgba(0,86,210,0.05)]">
-                                        <ProjectImage images={project.images} alt={project.title} />
-                                    </div>
+                    <AnimatePresence mode="popLayout">
+                        {projects
+                            .filter(project => activeFilter === "All" || project.category === activeFilter)
+                            .map((project) => (
+                                <motion.div
+                                    layout
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.95 }}
+                                    transition={{ duration: 0.3 }}
+                                    key={project.title}
+                                    className="portfolio-item"
+                                >
+                                    <GlassCard className="rounded-[20px] overflow-hidden flex flex-col group hover:-translate-y-2 hover:border-[rgba(0,86,210,0.3)] transition-all duration-400 h-full border border-[rgba(0,86,210,0.08)] bg-[rgba(255,255,255,0.6)] backdrop-blur-md">
+                                        {/* Thumbnail Image Container */}
+                                        <div className="w-full aspect-[16/10] overflow-hidden relative bg-zinc-100 border-b border-[rgba(0,86,210,0.05)]">
+                                            <ProjectImage images={project.images} alt={project.title} />
+                                        </div>
 
-                                    {/* Project Meta and Details */}
-                                    <div className="p-6 flex-1 flex flex-col justify-between">
-                                        <div>
-                                            <div className="flex flex-wrap gap-1.5 mb-4">
-                                                {project.tags.map((tag) => (
-                                                    <span
-                                                        key={tag}
-                                                        className="font-mono text-[0.6875rem] uppercase tracking-wider text-[var(--brand-blue)] bg-[rgba(0,86,210,0.04)] px-2.5 py-1 rounded-full font-semibold border border-[rgba(0,86,210,0.05)]"
-                                                    >
-                                                        {tag}
-                                                    </span>
-                                                ))}
+                                        {/* Project Meta and Details */}
+                                        <div className="p-6 flex-1 flex flex-col justify-between">
+                                            <div>
+                                                <div className="flex flex-wrap gap-1.5 mb-4">
+                                                    {project.tags.map((tag) => (
+                                                        <span
+                                                            key={tag}
+                                                            className="font-mono text-[0.6875rem] uppercase tracking-wider text-[var(--brand-blue)] bg-[rgba(0,86,210,0.04)] px-2.5 py-1 rounded-full font-semibold border border-[rgba(0,86,210,0.05)]"
+                                                        >
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+
+                                                <h3 className="font-display font-bold text-[1.25rem] text-[var(--brand-dark-text)] mb-3 group-hover:text-[var(--brand-blue)] transition-colors duration-300">
+                                                    {project.title}
+                                                </h3>
+
+                                                <p className="font-body text-[0.875rem] md:text-[0.9375rem] text-[var(--brand-gray)] leading-[1.6] mb-6">
+                                                    {project.description}
+                                                </p>
                                             </div>
 
-                                            <h3 className="font-display font-bold text-[1.25rem] text-[var(--brand-dark-text)] mb-3 group-hover:text-[var(--brand-blue)] transition-colors duration-300">
-                                                {project.title}
-                                            </h3>
+                                            {/* Action buttons */}
+                                            <div className="flex items-center gap-4 mt-auto pt-4 border-t border-[rgba(0,0,0,0.04)]">
+                                                {project.ctaHref && project.ctaText ? (
+                                                    <Link
+                                                        href={project.ctaHref}
+                                                        className="font-body font-bold text-[0.8125rem] text-[var(--brand-blue)] hover:text-[#004bb8] flex items-center gap-1 group/link"
+                                                    >
+                                                        {project.ctaText}
+                                                        <svg className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                                        </svg>
+                                                    </Link>
+                                                ) : (
+                                                    <Link
+                                                        href="/contact"
+                                                        className="font-body font-bold text-[0.8125rem] text-[var(--brand-blue)] hover:text-[#004bb8] flex items-center gap-1 group/link"
+                                                    >
+                                                        Inquire Project
+                                                        <svg className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                                        </svg>
+                                                    </Link>
+                                                )}
 
-                                            <p className="font-body text-[0.875rem] md:text-[0.9375rem] text-[var(--brand-gray)] leading-[1.6] mb-6">
-                                                {project.description}
-                                            </p>
+                                                {project.secondaryCtaHref && project.secondaryCtaText && (
+                                                    <Link
+                                                        href={project.secondaryCtaHref}
+                                                        className="font-body text-[0.8125rem] text-[var(--brand-gray)] hover:text-[var(--brand-dark-text)] ml-auto"
+                                                    >
+                                                        {project.secondaryCtaText}
+                                                    </Link>
+                                                )}
+                                            </div>
                                         </div>
-
-                                        {/* Action buttons */}
-                                        <div className="flex items-center gap-4 mt-auto pt-4 border-t border-[rgba(0,0,0,0.04)]">
-                                            {project.ctaHref && project.ctaText ? (
-                                                <Link
-                                                    href={project.ctaHref}
-                                                    className="font-body font-bold text-[0.8125rem] text-[var(--brand-blue)] hover:text-[#004bb8] flex items-center gap-1 group/link"
-                                                >
-                                                    {project.ctaText}
-                                                    <svg className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                                    </svg>
-                                                </Link>
-                                            ) : (
-                                                <Link
-                                                    href="/contact"
-                                                    className="font-body font-bold text-[0.8125rem] text-[var(--brand-blue)] hover:text-[#004bb8] flex items-center gap-1 group/link"
-                                                >
-                                                    Inquire Project
-                                                    <svg className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                                    </svg>
-                                                </Link>
-                                            )}
-
-                                            {project.secondaryCtaHref && project.secondaryCtaText && (
-                                                <Link
-                                                    href={project.secondaryCtaHref}
-                                                    className="font-body text-[0.8125rem] text-[var(--brand-gray)] hover:text-[var(--brand-dark-text)] ml-auto"
-                                                >
-                                                    {project.secondaryCtaText}
-                                                </Link>
-                                            )}
-                                        </div>
-                                    </div>
-                                </GlassCard>
-                            </div>
-                        );
-                    })}
+                                    </GlassCard>
+                                </motion.div>
+                            ))}
+                    </AnimatePresence>
                 </div>
             </div>
         </section>

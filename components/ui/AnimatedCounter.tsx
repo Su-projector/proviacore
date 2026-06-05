@@ -15,6 +15,7 @@ export const AnimatedCounter = React.forwardRef<HTMLDivElement, AnimatedCounterP
     const resolvedRef = (ref as any) || internalRef;
     const [count, setCount] = useState(0);
     const [hasAnimated, setHasAnimated] = useState(false);
+    const hasAnimatedRef = useRef(false);
     
     useEffect(() => {
       // Respect prefers-reduced-motion
@@ -22,12 +23,14 @@ export const AnimatedCounter = React.forwardRef<HTMLDivElement, AnimatedCounterP
       if (mediaQuery.matches) {
         setCount(value);
         setHasAnimated(true);
+        hasAnimatedRef.current = true;
         return;
       }
 
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting && !hasAnimated) {
+          if (entry.isIntersecting && !hasAnimatedRef.current) {
+            hasAnimatedRef.current = true;
             setHasAnimated(true);
             let startTime: number | null = null;
             
@@ -59,7 +62,7 @@ export const AnimatedCounter = React.forwardRef<HTMLDivElement, AnimatedCounterP
       }
       
       return () => observer.disconnect();
-    }, [value, duration, hasAnimated, resolvedRef]);
+    }, [value, duration, resolvedRef]);
 
     return (
       <div 

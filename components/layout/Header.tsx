@@ -10,6 +10,7 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [currentHash, setCurrentHash] = useState("");
     const pathname = usePathname();
 
     useEffect(() => {
@@ -19,6 +20,19 @@ const Header = () => {
         window.addEventListener("scroll", handleScroll, { passive: true });
         handleScroll();
         return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    useEffect(() => {
+        const handleHashChange = () => {
+            setCurrentHash(window.location.hash);
+        };
+        window.addEventListener("hashchange", handleHashChange);
+        window.addEventListener("popstate", handleHashChange);
+        handleHashChange();
+        return () => {
+            window.removeEventListener("hashchange", handleHashChange);
+            window.removeEventListener("popstate", handleHashChange);
+        };
     }, []);
 
     const navLinks = [
@@ -59,11 +73,24 @@ const Header = () => {
                 {/* Desktop Navigation */}
                 <nav className="hidden lg:flex items-center space-x-8">
                     {navLinks.map((link) => {
-                        const isActive = pathname === link.href || (pathname === '/' && link.href === '/') || (link.href.startsWith('/#') && false); // Basic active logic
+                        const hashIndex = link.href.indexOf('#');
+                        const linkPathname = hashIndex !== -1 ? link.href.slice(0, hashIndex) : link.href;
+                        const linkHash = hashIndex !== -1 ? link.href.slice(hashIndex) : "";
+
+                        let isActive = false;
+                        if (linkPathname === "/" && pathname === "/") {
+                            isActive = currentHash === linkHash;
+                        } else if (linkPathname !== "/") {
+                            isActive = pathname === linkPathname;
+                        }
+
                         return (
                             <div key={link.name} className="relative group flex flex-col items-center">
                                 <Link
                                     href={link.href}
+                                    onClick={() => {
+                                        setCurrentHash(linkHash);
+                                    }}
                                     className={`text-sm font-body font-medium tracking-[0.02em] transition-colors pb-1 ${
                                         isDarkBackground ? 'text-[rgba(255,255,255,0.8)] hover:text-white' : 'text-[var(--brand-gray)] hover:text-[var(--brand-dark-text)]'
                                     }`}
@@ -83,11 +110,9 @@ const Header = () => {
 
                 <div className="flex items-center space-x-4">
                     <div className="hidden sm:block">
-                        <Link href="/get-started">
-                            <MagneticButton variant={isDarkBackground ? "ghost" : "primary"}>
-                                Start a Project
-                            </MagneticButton>
-                        </Link>
+                        <MagneticButton variant={isDarkBackground ? "ghost" : "primary"} href="/get-started">
+                            Start a Project
+                        </MagneticButton>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -125,22 +150,29 @@ const Header = () => {
 
                         <div className="flex-1 overflow-y-auto px-6 py-12 flex flex-col justify-center">
                             <nav className="flex flex-col space-y-6 text-center">
-                                {navLinks.map((link, i) => (
-                                    <motion.div
-                                        key={link.name}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.1 + (i * 0.08), duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                                    >
-                                        <Link
-                                            href={link.href}
-                                            className="font-display font-medium text-[2rem] text-[var(--brand-dark-text)] hover:text-[var(--brand-blue)] transition-colors inline-block"
-                                            onClick={closeMenu}
+                                {navLinks.map((link, i) => {
+                                    const hashIndex = link.href.indexOf('#');
+                                    const linkHash = hashIndex !== -1 ? link.href.slice(hashIndex) : "";
+                                    return (
+                                        <motion.div
+                                            key={link.name}
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: 0.1 + (i * 0.08), duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                                         >
-                                            {link.name}
-                                        </Link>
-                                    </motion.div>
-                                ))}
+                                            <Link
+                                                href={link.href}
+                                                className="font-display font-medium text-[2rem] text-[var(--brand-dark-text)] hover:text-[var(--brand-blue)] transition-colors inline-block"
+                                                onClick={() => {
+                                                    setCurrentHash(linkHash);
+                                                    closeMenu();
+                                                }}
+                                            >
+                                                {link.name}
+                                            </Link>
+                                        </motion.div>
+                                    );
+                                })}
                             </nav>
 
                             <motion.div 
@@ -149,10 +181,12 @@ const Header = () => {
                                 transition={{ delay: 0.8, duration: 0.4 }}
                                 className="mt-12 pt-8 border-t border-[rgba(0,86,210,0.1)] px-4"
                             >
-                                <Link href="/get-started" onClick={closeMenu}>
-                                    <button className="w-full bg-[var(--brand-blue)] text-white rounded-[var(--radius-sm)] py-4 font-body font-semibold text-lg hover:bg-[#004bb8] transition-colors">
-                                        Start a Project
-                                    </button>
+                                <Link 
+                                    href="/get-started" 
+                                    onClick={closeMenu}
+                                    className="w-full bg-[var(--brand-blue)] text-white rounded-[var(--radius-sm)] py-4 font-body font-semibold text-lg hover:bg-[#004bb8] transition-colors flex items-center justify-center text-center"
+                                >
+                                    Start a Project
                                 </Link>
                             </motion.div>
                         </div>

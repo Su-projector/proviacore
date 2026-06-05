@@ -8,7 +8,7 @@ import { CursorSpotlight } from '@/components/ui/CursorSpotlight';
 
 const PortfolioCTA = () => {
     return (
-        <CursorSpotlight className="relative w-full py-[128px] md:py-[96px] py-[64px] overflow-hidden bg-gradient-to-r from-[var(--brand-navy)] via-[var(--brand-blue)] to-[var(--brand-navy)] bg-[length:200%_auto] animate-[gradient-shift_8s_ease_infinite]">
+        <CursorSpotlight className="relative w-full py-[64px] md:py-[80px] lg:py-[128px] overflow-hidden bg-gradient-to-r from-[var(--brand-navy)] via-[var(--brand-blue)] to-[var(--brand-navy)] bg-[length:200%_auto] animate-[gradient-shift_8s_ease_infinite]">
             {/* Noise Texture */}
             <div 
                 className="absolute inset-0 pointer-events-none z-[1] opacity-[0.03]"
@@ -26,15 +26,14 @@ const PortfolioCTA = () => {
                         Explore our portfolio to see the kinds of solutions we have designed and delivered. Use any project as a reference; build something similar with us, or take a different path entirely. We design and engineer systems shaped around your goals, not templates.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto">
-                        <Link href="/get-started" className="w-full sm:w-auto">
-                            <MagneticButton variant="primary" className="w-full sm:w-auto bg-[var(--brand-blue)] hover:bg-[#004bb8]">
-                                Start a Project
-                            </MagneticButton>
-                        </Link>
-                        <Link href="/portfolio" className="w-full sm:w-auto group">
-                            <button className="w-full sm:w-auto bg-transparent text-white border-[1.5px] border-[rgba(255,255,255,0.3)] hover:bg-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.5)] rounded-[8px] px-[32px] py-[14px] font-body font-semibold text-[0.875rem] tracking-[0.02em] transition-all duration-300">
-                                View Portfolio & Expertise
-                            </button>
+                        <MagneticButton variant="primary" href="/get-started" className="w-full sm:w-auto bg-[var(--brand-blue)] hover:bg-[#004bb8]">
+                            Start a Project
+                        </MagneticButton>
+                        <Link 
+                            href="/portfolio" 
+                            className="w-full sm:w-auto bg-transparent text-white border-[1.5px] border-[rgba(255,255,255,0.3)] hover:bg-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.5)] rounded-[8px] px-[32px] py-[14px] font-body font-semibold text-[0.875rem] tracking-[0.02em] transition-all duration-300 flex items-center justify-center text-center"
+                        >
+                            View Portfolio & Expertise
                         </Link>
                     </div>
                 </ScrollReveal>

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import Link from "next/link";
+
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 
@@ -101,11 +101,9 @@ const FounderNote = () => {
                                 </a>
                             </div>
 
-                            <Link href="/contact" className="w-full sm:w-auto">
-                                <MagneticButton variant="primary" className="w-full sm:w-auto">
-                                    Book a Strategy Call
-                                </MagneticButton>
-                            </Link>
+                            <MagneticButton variant="primary" href="/contact" className="w-full sm:w-auto">
+                                Book a Strategy Call
+                            </MagneticButton>
                         </div>
                     </ScrollReveal>
                 </div>

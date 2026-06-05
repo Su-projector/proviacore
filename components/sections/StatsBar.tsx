@@ -28,7 +28,7 @@ const StatItem = ({ value, suffix, label, delay }: StatItemProps) => {
         className="font-mono text-[var(--brand-dark-text)] text-[clamp(2.5rem,7vw,7rem)] leading-none font-bold flex items-baseline justify-center"
       >
         <span>{Math.round(count)}</span>
-        {isComplete && suffix && (
+        {suffix && (
           <span className="text-[var(--brand-coral)] font-sans font-medium text-[clamp(1.5rem,4vw,3.5rem)] ml-1">{suffix}</span>
         )}
       </div>

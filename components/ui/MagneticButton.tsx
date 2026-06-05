@@ -1,21 +1,28 @@
 'use client';
 
 import React, { useRef, useState, useCallback } from 'react';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
-interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface MagneticButtonProps extends Omit<React.HTMLAttributes<HTMLElement>, 'color'> {
   variant?: 'primary' | 'secondary' | 'ghost';
+  href?: string;
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  target?: string;
+  rel?: string;
 }
 
-export const MagneticButton = React.forwardRef<HTMLButtonElement, MagneticButtonProps>(
-  ({ children, className, variant = 'primary', ...props }, ref) => {
-    const internalRef = useRef<HTMLButtonElement>(null);
-    const resolvedRef = (ref as any) || internalRef;
+export const MagneticButton = React.forwardRef<any, MagneticButtonProps>(
+  ({ children, className, variant = 'primary', href, ...props }, ref) => {
+    const internalRef = useRef<any>(null);
+    const resolvedRef = ref || internalRef;
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
-    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-      if (!resolvedRef.current) return;
-      const rect = resolvedRef.current.getBoundingClientRect();
+    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+      const currentElement = (resolvedRef as React.RefObject<any>).current;
+      if (!currentElement) return;
+      const rect = currentElement.getBoundingClientRect();
       const x = (e.clientX - rect.left - rect.width / 2) * 0.15;
       const y = (e.clientY - rect.top - rect.height / 2) * 0.15;
       
@@ -36,30 +43,54 @@ export const MagneticButton = React.forwardRef<HTMLButtonElement, MagneticButton
       ghost: "bg-transparent text-[var(--brand-white)] border-[1.5px] border-[rgba(255,255,255,0.3)] hover:bg-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.5)]",
     };
 
+    const commonClasses = cn(
+      "rounded-[var(--radius-sm)] px-[32px] py-[14px]",
+      "font-body font-semibold text-[0.875rem] tracking-[0.02em]",
+      "transition-all duration-300 ease-[var(--ease-default)]",
+      "flex items-center justify-center cursor-pointer",
+      variants[variant],
+      className
+    );
+
+    const style = { 
+      transform: `translate(${position.x}px, ${position.y}px)` 
+    };
+
+    const content = (
+      <span 
+        className="inline-block transition-transform duration-300 ease-[var(--ease-default)]"
+        style={{ transform: `translate(${position.x * 0.5}px, ${position.y * 0.5}px)` }}
+      >
+        {children}
+      </span>
+    );
+
+    if (href) {
+      return (
+        <Link
+          ref={resolvedRef}
+          href={href}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          className={commonClasses}
+          style={style}
+          {...(props as any)}
+        >
+          {content}
+        </Link>
+      );
+    }
+
     return (
       <button
         ref={resolvedRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className={cn(
-          "rounded-[var(--radius-sm)] px-[32px] py-[14px]",
-          "font-body font-semibold text-[0.875rem] tracking-[0.02em]",
-          "transition-all duration-300 ease-[var(--ease-default)]",
-          "flex items-center justify-center",
-          variants[variant],
-          className
-        )}
-        style={{ 
-          transform: `translate(${position.x}px, ${position.y}px)` 
-        }}
-        {...props}
+        className={commonClasses}
+        style={style}
+        {...(props as any)}
       >
-        <span 
-          className="inline-block transition-transform duration-300 ease-[var(--ease-default)]"
-          style={{ transform: `translate(${position.x * 0.5}px, ${position.y * 0.5}px)` }}
-        >
-          {children}
-        </span>
+        {content}
       </button>
     );
   }
