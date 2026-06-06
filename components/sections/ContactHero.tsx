@@ -2,7 +2,7 @@
 
 const ContactHero = () => {
     return (
-        <section className="bg-zinc-50 pt-24 pb-12 sm:pt-32 sm:pb-16 border-b border-zinc-100">
+        <section className="bg-zinc-50 pt-20 pb-8 sm:pt-28 sm:pb-12 border-b border-zinc-100">
             <div className="section-container">
                 <div className="max-w-2xl mx-auto text-center">
                     <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 sm:text-6xl">

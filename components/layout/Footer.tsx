@@ -7,7 +7,7 @@ const Footer = () => {
         <footer className="w-full bg-(--brand-navy) text-(--brand-white)">
             
             {/* Top Section - Full Bleed */}
-            <CursorSpotlight className="relative w-screen left-[50%] -translate-x-[50%] py-[80px] md:py-[128px] overflow-hidden bg-(--brand-navy)">
+            <CursorSpotlight className="relative w-screen left-[50%] -translate-x-[50%] py-[80px] md:py-[128px] overflow-hidden bg-gradient-to-r from-[var(--brand-navy)] via-[var(--brand-blue)] to-[var(--brand-navy)] bg-[length:200%_auto] animate-[gradient-shift_8s_ease_infinite]">
                 {/* Grid Pattern Overlay */}
                 <div 
                     className="absolute inset-0 z-0 opacity-5 pointer-events-none"
@@ -111,7 +111,9 @@ const Footer = () => {
                 </div>
             </div>
 
-            {/* Bottom Bar */}
+                {/* Dark Gradient Band */}
+                <div className="bg-gradient-to-b from-[var(--brand-navy)] to-black h-8"></div>
+                {/* Bottom Bar */}
             <div className="bg-(--brand-navy) py-[24px] border-t border-[rgba(255,255,255,0.1)]">
                 <div className="w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="font-mono text-[0.75rem] uppercase tracking-[0.12em] text-[rgba(255,255,255,0.5)]">
