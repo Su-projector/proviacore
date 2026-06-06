@@ -65,9 +65,14 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
       <Hero />
-      <WaveDivider fill="#F8F9FB" />
-      <StatsBar />
-      <DiagonalDivider from="#F8F9FB" to="#FFFFFF" />
+      <div className="hidden md:block">
+        <WaveDivider fill="#F8F9FB" />
+        <StatsBar />
+        <DiagonalDivider from="#F8F9FB" to="#FFFFFF" />
+      </div>
+      <div className="block md:hidden">
+        <DiagonalDivider from="#0056D2" to="#FFFFFF" />
+      </div>
       <Services />
       <FounderNote />
       <DiagonalDivider from="#F8F9FB" to="#0B1120" />

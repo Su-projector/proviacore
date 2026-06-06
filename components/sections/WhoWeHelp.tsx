@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
 const WhoWeHelp = () => {
@@ -34,19 +34,96 @@ const WhoWeHelp = () => {
         },
     ];
 
-    return (
-        <section id="who-we-help" className="bg-[var(--brand-light)] py-[64px] md:py-[80px] lg:py-[96px]">
-            <div className="w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-12">
-                <ScrollReveal className="max-w-3xl mx-auto text-center mb-16">
-                    <h2 className="font-display font-bold text-[clamp(2rem,5vw,3rem)] tracking-[-0.02em] text-[var(--brand-dark-text)] mb-6 leading-[1.1]">
-                        Who We <span className="text-[var(--brand-coral)]">Empower.</span>
-                    </h2>
-                    <p className="font-body text-[1rem] md:text-[1.125rem] text-[var(--brand-gray)] leading-[1.7]">
-                        Tailored digital expertise for those who value precision, clarity, and sustainable growth.
-                    </p>
-                </ScrollReveal>
+    const [activeIndex, setActiveIndex] = useState(0);
+    const scrollRef = useRef<HTMLDivElement>(null);
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    const handleScroll = () => {
+        if (scrollRef.current) {
+            const container = scrollRef.current;
+            const scrollLeft = container.scrollLeft;
+            const children = container.children;
+            let closestIndex = 0;
+            let minDiff = Infinity;
+            
+            for (let i = 0; i < children.length - 1; i++) {
+                const child = children[i] as HTMLElement;
+                const childCenter = child.offsetLeft + child.clientWidth / 2;
+                const containerCenter = scrollLeft + container.clientWidth / 2;
+                const diff = Math.abs(childCenter - containerCenter);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    closestIndex = i;
+                }
+            }
+            setActiveIndex(closestIndex);
+        }
+    };
+
+    return (
+        <section id="who-we-empower" className="bg-[var(--brand-light)] py-[40px] md:py-[80px] lg:py-[96px]">
+            <div className="w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-12">
+                {/* Desktop Heading Block */}
+                <div className="hidden md:block">
+                    <ScrollReveal className="max-w-3xl mx-auto text-center mb-16">
+                        <h2 className="font-display font-bold text-[clamp(2rem,5vw,3rem)] tracking-[-0.02em] text-[var(--brand-dark-text)] mb-6 leading-[1.1]">
+                            Who We <span className="text-[var(--brand-coral)]">Empower.</span>
+                        </h2>
+                        <p className="font-body text-[1rem] md:text-[1.125rem] text-[var(--brand-gray)] leading-[1.7]">
+                            Tailored digital expertise for those who value precision, clarity, and sustainable growth.
+                        </p>
+                    </ScrollReveal>
+                </div>
+
+                {/* Mobile Heading Block - Compact Label */}
+                <div className="block md:hidden mb-6 text-center">
+                    <span className="font-mono text-[0.75rem] font-bold uppercase tracking-[0.12em] text-[var(--brand-blue)] bg-[rgba(0,86,210,0.06)] px-3 py-1.5 rounded-full inline-block">
+                        Who We Empower
+                    </span>
+                </div>
+
+                {/* Mobile Carousel Container */}
+                <div className="block md:hidden relative select-none">
+                    <div 
+                        ref={scrollRef}
+                        onScroll={handleScroll}
+                        className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-6 pb-6 no-scrollbar"
+                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                    >
+                        {categories.map((category, index) => (
+                            <div 
+                                key={index} 
+                                className="w-[85vw] shrink-0 snap-center"
+                            >
+                                <div className="bg-white rounded-[var(--radius-lg)] p-6 flex flex-col items-start border border-[rgba(0,86,210,0.08)] shadow-[var(--shadow-sm)] min-h-[200px]">
+                                    <div className="w-10 h-10 rounded-[8px] bg-[rgba(0,86,210,0.05)] flex items-center justify-center mb-4">
+                                        {category.icon}
+                                    </div>
+                                    <h3 className="font-display font-bold text-[1.15rem] text-[var(--brand-dark-text)] mb-2">
+                                        {category.title}
+                                    </h3>
+                                    <p className="font-body text-[0.875rem] text-[var(--brand-gray)] leading-[1.6]">
+                                        {category.description}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                        {/* Empty spacing element at the end for scroll padding */}
+                        <div className="w-[1px] shrink-0" />
+                    </div>
+
+                    {/* Pagination Dots */}
+                    <div className="flex justify-center gap-2 mt-2">
+                        {categories.map((_, index) => (
+                            <div 
+                                key={index}
+                                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === activeIndex ? 'bg-[var(--brand-blue)] w-5' : 'bg-gray-300'}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                {/* Desktop Grid Layout */}
+                <div className="hidden md:grid grid-cols-3 gap-8">
                     {categories.map((category, index) => (
                         <ScrollReveal key={index} delay={index * 150}>
                             <div className="bg-white rounded-[var(--radius-lg)] p-8 md:p-10 flex flex-col items-start hover:-translate-y-2 hover:shadow-[var(--shadow-md)] transition-all duration-400 border border-[rgba(0,0,0,0.03)] h-full">

@@ -8,7 +8,7 @@ import { CursorSpotlight } from '@/components/ui/CursorSpotlight';
 
 const PortfolioCTA = () => {
     return (
-        <CursorSpotlight className="relative w-full py-[64px] md:py-[80px] lg:py-[128px] overflow-hidden bg-gradient-to-r from-[var(--brand-navy)] via-[var(--brand-blue)] to-[var(--brand-navy)] bg-[length:200%_auto] animate-[gradient-shift_8s_ease_infinite]">
+        <CursorSpotlight className="hidden md:block relative w-full py-[64px] md:py-[80px] lg:py-[128px] overflow-hidden bg-gradient-to-r from-[var(--brand-navy)] via-[var(--brand-blue)] to-[var(--brand-navy)] bg-[length:200%_auto] animate-[gradient-shift_8s_ease_infinite]">
             {/* Noise Texture */}
             <div 
                 className="absolute inset-0 pointer-events-none z-[1] opacity-[0.03]"

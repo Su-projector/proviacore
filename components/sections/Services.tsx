@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
@@ -8,6 +8,7 @@ const Services = () => {
     const services = [
         {
             title: "Custom Development",
+            subtitle: "Bespoke high-performance web systems.",
             description: "Bespoke web solutions built around your business goals, using modern technologies to deliver reliable products.",
             icon: (
                 <svg className="w-8 h-8" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
@@ -23,6 +24,7 @@ const Services = () => {
         },
         {
             title: "Responsive Excellence",
+            subtitle: "Seamless experience across all devices.",
             description: "Mobile-first designs that deliver consistent, intuitive experiences across all devices and screen sizes.",
             icon: (
                 <svg className="w-8 h-8" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
@@ -34,6 +36,7 @@ const Services = () => {
         },
         {
             title: "SEO Mastery",
+            subtitle: "Search-engine-friendly web architectures.",
             description: "Search-engine-friendly architecture baked in from the start to improve visibility and growth.",
             icon: (
                 <svg className="w-8 h-8" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
@@ -46,6 +49,7 @@ const Services = () => {
         },
         {
             title: "Brand Advisory",
+            subtitle: "Strategic design for modern brands.",
             description: "Strategic clarity and design direction to help your brand stand out in a crowded digital landscape.",
             icon: (
                 <svg className="w-8 h-8" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
@@ -57,6 +61,7 @@ const Services = () => {
         },
         {
             title: "Enterprise Security",
+            subtitle: "Robust security protecting your data.",
             description: "Robust security practices and infrastructure designed to protect your data, users, and operations.",
             icon: (
                 <svg className="w-8 h-8" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
@@ -67,6 +72,7 @@ const Services = () => {
         },
         {
             title: "Strategic Evolution",
+            subtitle: "Ongoing guidance for scaling platforms.",
             description: "Ongoing advisory and technical updates to keep your systems stable and evolving with your scale.",
             icon: (
                 <svg className="w-8 h-8" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
@@ -76,8 +82,116 @@ const Services = () => {
         },
     ];
 
+    const row1Ref = useRef<HTMLDivElement>(null);
+    const row2Ref = useRef<HTMLDivElement>(null);
+    const [isPaused, setIsPaused] = useState(false);
+    const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
+
+    const [isMobile, setIsMobile] = useState(false);
+    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+    const progressRef = useRef(0);
+    const directionRef = useRef(1); // 1 = forward, -1 = backward
+    const animationRef = useRef<number | null>(null);
+    const lastTouchTimeRef = useRef(0);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
+        const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        setPrefersReducedMotion(motionQuery.matches);
+        
+        const handleMotionChange = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+        motionQuery.addEventListener('change', handleMotionChange);
+
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            motionQuery.removeEventListener('change', handleMotionChange);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!isMobile || prefersReducedMotion) return;
+
+        const animate = () => {
+            const now = Date.now();
+            const shouldPause = isPaused || (now - lastTouchTimeRef.current < 3000);
+
+            if (!shouldPause && row1Ref.current && row2Ref.current) {
+                const row1 = row1Ref.current;
+                const row2 = row2Ref.current;
+
+                const limit1 = row1.scrollWidth - row1.clientWidth;
+                const limit2 = row2.scrollWidth - row2.clientWidth;
+
+                if (limit1 > 0 || limit2 > 0) {
+                    const delta = 0.0008; // smooth slow rate
+                    progressRef.current += directionRef.current * delta;
+
+                    if (progressRef.current >= 1) {
+                        progressRef.current = 1;
+                        directionRef.current = -1;
+                    } else if (progressRef.current <= 0) {
+                        progressRef.current = 0;
+                        directionRef.current = 1;
+                    }
+
+                    if (limit1 > 0) {
+                        row1.scrollLeft = progressRef.current * limit1;
+                    }
+                    if (limit2 > 0) {
+                        row2.scrollLeft = (1 - progressRef.current) * limit2;
+                    }
+                }
+            }
+            animationRef.current = requestAnimationFrame(animate);
+        };
+
+        animationRef.current = requestAnimationFrame(animate);
+
+        return () => {
+            if (animationRef.current) {
+                cancelAnimationFrame(animationRef.current);
+            }
+        };
+    }, [isMobile, prefersReducedMotion, isPaused]);
+
+    const handleTouchStart = () => {
+        setIsPaused(true);
+        lastTouchTimeRef.current = Date.now();
+    };
+
+    const handleTouchMove = () => {
+        lastTouchTimeRef.current = Date.now();
+    };
+
+    const handleTouchEnd = (rowNum: number) => {
+        lastTouchTimeRef.current = Date.now();
+        setIsPaused(false);
+
+        setTimeout(() => {
+            if (rowNum === 1 && row1Ref.current) {
+                const r1 = row1Ref.current;
+                const limit1 = r1.scrollWidth - r1.clientWidth;
+                if (limit1 > 0) {
+                    progressRef.current = r1.scrollLeft / limit1;
+                }
+            } else if (rowNum === 2 && row2Ref.current) {
+                const r2 = row2Ref.current;
+                const limit2 = r2.scrollWidth - r2.clientWidth;
+                if (limit2 > 0) {
+                    progressRef.current = 1 - (r2.scrollLeft / limit2);
+                }
+            }
+            progressRef.current = Math.max(0, Math.min(1, progressRef.current));
+        }, 100);
+    };
+
     return (
-        <section id="services" className="relative bg-[var(--brand-white)] py-[64px] md:py-[80px] lg:py-[96px] overflow-hidden">
+        <section id="services" className="relative bg-[var(--brand-white)] py-[40px] md:py-[80px] lg:py-[96px] overflow-hidden">
             {/* Noise Texture */}
             <div 
                 className="absolute inset-0 pointer-events-none z-[1] opacity-[0.03]"
@@ -87,16 +201,110 @@ const Services = () => {
             />
             
             <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-12">
-                <ScrollReveal className="max-w-3xl mx-auto text-center mb-16 lg:mb-24">
-                    <h2 className="font-display font-bold text-[clamp(2rem,5vw,3rem)] tracking-[-0.02em] text-[var(--brand-dark-text)] mb-6 leading-[1.1]">
-                        Engineered for <span className="text-[var(--brand-coral)]">Performance.</span>
-                    </h2>
-                    <p className="font-body text-[1rem] md:text-[1.125rem] text-[var(--brand-gray)] leading-[1.7]">
-                        We merge technical precision with creative strategy to build digital ecosystems that do not just work — they excel.
-                    </p>
-                </ScrollReveal>
+                {/* Desktop Headline Block */}
+                <div className="hidden md:block">
+                    <ScrollReveal className="max-w-3xl mx-auto text-center mb-16 lg:mb-24">
+                        <h2 className="font-display font-bold text-[clamp(2rem,5vw,3rem)] tracking-[-0.02em] text-[var(--brand-dark-text)] mb-6 leading-[1.1]">
+                            Engineered for <span className="text-[var(--brand-coral)]">Performance.</span>
+                        </h2>
+                        <p className="font-body text-[1rem] md:text-[1.125rem] text-[var(--brand-gray)] leading-[1.7]">
+                            We merge technical precision with creative strategy to build digital ecosystems that do not just work — they excel.
+                        </p>
+                    </ScrollReveal>
+                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-10 services-grid">
+                {/* Mobile Heading - Compact Label */}
+                <div className="block md:hidden mb-6 text-center">
+                    <span className="font-mono text-[0.75rem] font-bold uppercase tracking-[0.12em] text-[var(--brand-blue)] bg-[rgba(0,86,210,0.06)] px-3 py-1.5 rounded-full inline-block">
+                        Engineered for Performance
+                    </span>
+                </div>
+
+                {/* Mobile Marquee container (Row 1 & Row 2) */}
+                <div className="flex md:hidden flex-col gap-4 mb-4 select-none">
+                    {/* Row 1 */}
+                    <div 
+                        ref={row1Ref}
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={() => handleTouchEnd(1)}
+                        onMouseDown={handleTouchStart}
+                        onMouseMove={handleTouchMove}
+                        onMouseUp={() => handleTouchEnd(1)}
+                        className="flex overflow-x-auto gap-4 py-2 px-4 no-scrollbar snap-x snap-mandatory"
+                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                    >
+                        {services.slice(0, 3).map((service, index) => (
+                            <div 
+                                key={index}
+                                onClick={() => setSelectedService(service)}
+                                className="w-[280px] shrink-0 snap-center cursor-pointer"
+                            >
+                                <GlassCard className="p-5 flex flex-col items-start h-[130px] justify-between border-[rgba(0,86,210,0.08)] bg-white hover:border-[rgba(0,86,210,0.2)] transition-all">
+                                    <div className="flex items-center gap-4 w-full">
+                                        <div className="w-10 h-10 rounded-[8px] bg-[rgba(0,86,210,0.05)] flex items-center justify-center shrink-0 text-[var(--brand-blue)]">
+                                            {service.icon}
+                                        </div>
+                                        <div className="text-left">
+                                            <h4 className="font-display font-bold text-[0.95rem] text-[var(--brand-dark-text)] leading-tight">
+                                                {service.title}
+                                            </h4>
+                                            <p className="font-body text-[0.75rem] text-[var(--brand-gray)] mt-1 leading-snug">
+                                                {service.subtitle}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <span className="font-mono text-[0.6rem] text-[var(--brand-blue)] uppercase tracking-wider font-semibold">
+                                        Tap to read more →
+                                    </span>
+                                </GlassCard>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Row 2 */}
+                    <div 
+                        ref={row2Ref}
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={() => handleTouchEnd(2)}
+                        onMouseDown={handleTouchStart}
+                        onMouseMove={handleTouchMove}
+                        onMouseUp={() => handleTouchEnd(2)}
+                        className="flex overflow-x-auto gap-4 py-2 px-4 no-scrollbar snap-x snap-mandatory"
+                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                    >
+                        {services.slice(3, 6).map((service, index) => (
+                            <div 
+                                key={index}
+                                onClick={() => setSelectedService(service)}
+                                className="w-[280px] shrink-0 snap-center cursor-pointer"
+                            >
+                                <GlassCard className="p-5 flex flex-col items-start h-[130px] justify-between border-[rgba(0,86,210,0.08)] bg-white hover:border-[rgba(0,86,210,0.2)] transition-all">
+                                    <div className="flex items-center gap-4 w-full">
+                                        <div className="w-10 h-10 rounded-[8px] bg-[rgba(0,86,210,0.05)] flex items-center justify-center shrink-0 text-[var(--brand-blue)]">
+                                            {service.icon}
+                                        </div>
+                                        <div className="text-left">
+                                            <h4 className="font-display font-bold text-[0.95rem] text-[var(--brand-dark-text)] leading-tight">
+                                                {service.title}
+                                            </h4>
+                                            <p className="font-body text-[0.75rem] text-[var(--brand-gray)] mt-1 leading-snug">
+                                                {service.subtitle}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <span className="font-mono text-[0.6rem] text-[var(--brand-blue)] uppercase tracking-wider font-semibold">
+                                        Tap to read more →
+                                    </span>
+                                </GlassCard>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Desktop layout */}
+                <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-10 services-grid">
                     {services.map((service, index) => {
                         const isMiddleColumn = index % 3 === 1;
                         return (
@@ -122,6 +330,33 @@ const Services = () => {
                     })}
                 </div>
             </div>
+
+            {/* Modal Overlay for Mobile card descriptions */}
+            {selectedService && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                    <div 
+                        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                        onClick={() => setSelectedService(null)}
+                    />
+                    <div className="relative z-10 w-full max-w-[340px] bg-white rounded-[16px] p-6 shadow-2xl border border-[rgba(0,86,210,0.1)] text-left">
+                        <button 
+                            onClick={() => setSelectedService(null)}
+                            className="absolute top-4 right-4 text-[var(--brand-gray)] hover:text-[var(--brand-dark-text)] font-semibold"
+                        >
+                            ✕
+                        </button>
+                        <div className="w-12 h-12 rounded-[12px] bg-[rgba(0,86,210,0.05)] flex items-center justify-center mb-4 text-[var(--brand-blue)]">
+                            {selectedService.icon}
+                        </div>
+                        <h3 className="font-display font-bold text-[1.2rem] text-[var(--brand-dark-text)] mb-3">
+                            {selectedService.title}
+                        </h3>
+                        <p className="font-body text-[0.875rem] text-[var(--brand-gray)] leading-[1.6]">
+                            {selectedService.description}
+                        </p>
+                    </div>
+                </div>
+            )}
         </section>
     );
 };
